@@ -4,9 +4,15 @@ Analysis of water dynamics in molecular dynamics trajectories and water interact
 """
 
 # Add imports here
+from ._version import get_versions
+from .waterdynamics import (
+    WaterOrientationalRelaxation,
+    AngularDistribution,
+    MeanSquareDisplacement,
+    SurvivalProbability,
+)
 
 # Handle versioneer
-from ._version import get_versions
 versions = get_versions()
 __version__ = versions['version']
 __git_revision__ = versions['full-revisionid']
