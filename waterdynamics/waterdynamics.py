@@ -21,7 +21,7 @@
 # J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787
 #
 
-"""Water dynamics analysis --- :mod:`MDAnalysis.analysis.waterdynamics`
+"""Water dynamics analysis --- :mod:`waterdynamics.waterdynamics`
 =======================================================================
 
 :Author: Alejandro Bernardin
@@ -41,9 +41,6 @@ For more information about this type of analysis please refer to
 :footcite:p:`ArayaSecchi2014` (water in a protein cavity) and
 :footcite:p:`Milischuk2011` (water in a nanopore).
 
-.. rubric:: References
-
-.. footbibliography::
 
 
 Example use of the analysis classes
@@ -71,7 +68,7 @@ other hand, if WOR decay very fast, we can assume that water molecules are
 rotating/changing direction very fast::
 
   import MDAnalysis
-  from MDAnalysis.analysis.waterdynamics import WaterOrientationalRelaxation as WOR
+  from waterdynamics import WaterOrientationalRelaxation as WOR
 
   u = MDAnalysis.Universe(pdb, trajectory)
   select = "byres name OH2 and sphzone 6.0 protein and resid 42"
@@ -128,7 +125,7 @@ water molecules are under an electric field or if they are interacting with
 something (residue, protein, etc)::
 
   import MDAnalysis
-  from MDAnalysis.analysis.waterdynamics import AngularDistribution as AD
+  from waterdynamics import AngularDistribution as AD
 
   u = MDAnalysis.Universe(pdb, trajectory)
   selection = "byres name OH2 and sphzone 6.0 (protein and (resid 42 or resid 26) )"
@@ -181,7 +178,7 @@ molecules travels inside protein in XYZ direction (cylindric zone of radius
 water molecules, a weak rise mean slow movement of particles::
 
   import MDAnalysis
-  from MDAnalysis.analysis.waterdynamics import MeanSquareDisplacement as MSD
+  from waterdynamics import MeanSquareDisplacement as MSD
 
   u = MDAnalysis.Universe(pdb, trajectory)
   select = "byres name OH2 and cyzone 11.0 4.0 -8.0 protein"
@@ -214,7 +211,7 @@ A slow decay of SP means a long permanence time of water molecules in
 the zone, on the other hand, a fast decay means a short permanence time::
 
   import MDAnalysis
-  from MDAnalysis.analysis.waterdynamics import SurvivalProbability as SP
+  from waterdynamics import SurvivalProbability as SP
   import matplotlib.pyplot as plt
 
   universe = MDAnalysis.Universe(pdb, trajectory)
@@ -238,7 +235,7 @@ the zone, on the other hand, a fast decay means a short permanence time::
 One should note that the `stop` keyword as used in the above example has an
 `exclusive` behaviour, i.e. here the final frame used will be 100 not 101.
 This behaviour is aligned with :class:`AnalysisBase` but currently differs from
-other :mod:`MDAnalysis.analysis.waterdynamics` classes, which all exhibit
+other :mod:`waterdynamics` classes, which all exhibit
 `inclusive` behaviour for their final frame selections.
 
 Another example applies to the situation where you work with many different "residues".
@@ -252,7 +249,7 @@ Note, for this example, it is advisable to use `Universe(in_memory=True)` to ens
 simulation is not being reloaded into memory for each lipid::
 
   import MDAnalysis as mda
-  from MDAnalysis.analysis.waterdynamics import SurvivalProbability as SP
+  from waterdynamics import SurvivalProbability as SP
   import numpy as np
 
   u = mda.Universe("md.gro", "md100ns.xtc", in_memory=True)
@@ -358,6 +355,9 @@ Classes
    :members:
    :inherited-members:
 
+.. rubric:: References
+
+.. footbibliography::
 """
 from MDAnalysis.lib.correlations import autocorrelation, correct_intermittency
 import MDAnalysis.analysis.hbonds
@@ -367,7 +367,7 @@ import warnings
 import numpy as np
 
 
-logger = logging.getLogger('MDAnalysis.analysis.waterdynamics')
+logger = logging.getLogger('waterdynamics')
 from MDAnalysis.lib.log import ProgressBar
 
 
@@ -903,11 +903,11 @@ class SurvivalProbability(object):
 
     Notes
     -----
-    Currently :class:`SurvivalProbability` is the only on in
-    :mod:`MDAnalysis.analysis.waterdynamics` to support an `exclusive`
+    Currently :class:`SurvivalProbability` is the only one in
+    :mod:`waterdynamics` to support an `exclusive`
     behaviour (i.e. similar to the current behaviour of :class:`AnalysisBase`
     to the `stop` keyword passed to :meth:`SurvivalProbability.run`. Unlike
-    other :mod:`MDAnalysis.analysis.waterdynamics` final frame definitions
+    other :mod:`waterdynamics` final frame definitions
     which are `inclusive`.
 
 
