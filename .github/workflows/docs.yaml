@@ -1,0 +1,62 @@
+name: docs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: "${{ github.ref }}-${{ github.head_ref }}"
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+  docs:
+    if: "github.repository == 'MDAnalysis/waterdynamics'"
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0         
+
+    - name: setup_miniconda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        python-version: 3.11
+        environment-file: docs/requirements.yaml
+        auto-update-conda: true
+        channel-priority: flexible
+        channels: conda-forge
+        miniforge-variant: Mambaforge
+        use-mamba: true
+
+    - name: Build and install package
+      run: |
+          mamba env update -n test -f devtools/conda-envs/test_env.yaml
+          python setup.py build_ext -i
+          python -m pip install -e .
+
+    - name: build docs
+      run: |
+        cd docs && sphinx-build -b html source build
+
+    - name: deploy docs
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.event_name != 'pull_request'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/build
+        user_name: 'github-actions'
+        user_email: 'github-action@users.noreply.github.com'
+
+    - uses: actions/upload-artifact@v3
+      if: github.event_name == 'pull_request'
+      with:
+        name: pr_docs
+        path: ./docs/build/
