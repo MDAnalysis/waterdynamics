@@ -28,8 +28,6 @@
 :Year: 2014-2015
 :Copyright: GNU Public License v3
 
-.. versionadded:: 0.11.0
-
 This module provides functions to analyze water dynamics trajectories and water
 interactions with other molecules.  The functions in this module are: water
 orientational relaxation (WOR) :footcite:p:`Yeh1999`, hydrogen bond lifetimes (HBL)
