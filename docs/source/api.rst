@@ -1,8 +1,4 @@
 API Documentation
 =================
 
-.. autosummary::
-   :toctree: autosummary
-   :recursive:
-
-   waterdynamics
+.. automodule:: waterdynamics.waterdynamics
