@@ -19,5 +19,35 @@ The rules for this file:
   * Don't ever delete anything
 -->
 
+**2015**
+- Sean L. Seyler <@sseyler>
+- Oliver Beckstein <@orbeckst>
+- Richard Gowers <@richardjgowers>
+- Max Linke <@kain88-de>
+
+**2016**
+- Jonathan Barnoud <@jbarnoud>
+- Utkarsh Saxena <@saxenauts>
+- Tyler Reddy <@tylerjereddy>
+
+**2017**
+- Vedant Rathore <@vedantrathore>
+- Dominik Mierzejewski <@rathann>
+- Utkarsh Bansal <@utkbansal>
+
+**2019**
+- João M.C. Teixeira <@joaomcteixeira>
+
+**2020**
+- Rocco Meli <@RMeli>
+- Irfan Alibay <@IAlibay>
+
+**2022**
+- Aditi Tripathi <@aditi2906>
+- Estefania Barreto-Ojeda <@ojeda-e>
+
 **2023**
-- MDAnalysis <@ianmkenney>
+- Pratham Chauhan <@ooprathamm>
+- Xu Hong Chen <@xhgchen>
+- Lily Wang <@lilyminium>
+- Ian Kenney <@ianmkenney>
