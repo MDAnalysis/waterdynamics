@@ -24,6 +24,7 @@ jobs:
         with:
           token: ${{ secrets.TEST_PYPI_API_TOKEN }}
           test_submission: true
+          tests: true
           test_deps: 'pytest MDAnalysisTests'
           package_name: 'waterdynamics'
 
@@ -33,3 +34,4 @@ jobs:
         with:
           token: ${{ secrets.PYPI_API_TOKEN }}
           package_name: 'waterdynamics'
+          tests: false
