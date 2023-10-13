@@ -72,6 +72,16 @@ conda deactivate
 
 #### With pip
 
+##### Install from PyPI
+
+The latest release of waterdynamics is available on [PyPI](https://pypi.org/project/waterdynamics/) and can be installed with:
+
+```
+pip install waterdynamics
+```
+
+##### Install from source
+
 To build the package from source, run:
 
 ```
