@@ -19,6 +19,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "MDAnalysis>=2.0.0",
+    "numpy>=1.22.3",
 ]
 keywords = [
     "molecular simulations",
@@ -39,9 +40,9 @@ doc = [
     "sphinx_rtd_theme",
 ]
 
-# [project.urls]
-# source = "https://github.com/MDAnalysis/waterdynamics"
-# documentation = "https://waterdynamics.readthedocs.io"
+[project.urls]
+source = "https://github.com/MDAnalysis/waterdynamics"
+documentation = "https://mdanalysis.org/waterdynamics"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
