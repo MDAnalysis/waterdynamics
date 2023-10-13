@@ -80,7 +80,11 @@
         <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pypi">PyPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-source">From source</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
@@ -116,12 +120,32 @@
 <p>This page details how to get started with waterdynamics.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p>Water dynamics can be installed from source.</p>
+<section id="pypi">
+<h3>PyPi<a class="headerlink" href="#pypi" title="Permalink to this heading"></a></h3>
+<p>The waterdyanmics package can be installed from PyPI with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>waterdynamics
+</pre></div>
+</div>
+<p>If you would like to test your installation, use the <cite>test</cite> optional dependencies and run the tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;waterdynamics[test]&quot;</span>
+pytest<span class="w"> </span>--pyargs<span class="w"> </span>waterdynamics.tests
+</pre></div>
+</div>
+</section>
+<section id="from-source">
+<h3>From source<a class="headerlink" href="#from-source" title="Permalink to this heading"></a></h3>
+<p>If you want the latest (non-release) version of waterdynamics, you should install the package from source.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/MDAnalysis/waterdynamics
 <span class="nb">cd</span><span class="w"> </span>waterdynamics
 pip<span class="w"> </span>install<span class="w"> </span>.
 </pre></div>
 </div>
+<p>If you want to run tests on your installation, install the <cite>test</cite> dependencies and run the tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;.[test]&quot;</span>
+pytest<span class="w"> </span>--pyargs<span class="w"> </span>waterdynamics.tests
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
