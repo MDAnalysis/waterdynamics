@@ -23,6 +23,7 @@ waterdynamics
 [url_mda]: https://www.mdanalysis.org
 
 Analysis of water dynamics in molecular dynamics trajectories and water interactions with other molecules.
+Documentation for waterdynamics can be found at <https://mdanalysis.org/waterdynamics>.
 
 waterdynamics is bound by a [Code of Conduct](https://github.com/MDAnalysis/waterdynamics/blob/main/CODE_OF_CONDUCT.md).
 
