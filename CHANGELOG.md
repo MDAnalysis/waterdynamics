@@ -19,7 +19,7 @@ The rules for this file:
 ## [Unreleased]
 
 ### Authors
-<!-- GitHub usernames of contributors to this release -->
+- ianmkenney
 
 ### Added
 <!-- New added features -->
@@ -35,3 +35,4 @@ The rules for this file:
 
 ### Removed
 <!-- Removed features -->
+

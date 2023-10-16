@@ -24,10 +24,6 @@
 """Water dynamics analysis --- :mod:`waterdynamics.waterdynamics`
 =======================================================================
 
-:Author: Alejandro Bernardin
-:Year: 2014-2015
-:Copyright: GNU Public License v3
-
 This module provides functions to analyze water dynamics trajectories and water
 interactions with other molecules.  The functions in this module are: water
 orientational relaxation (WOR) :footcite:p:`Yeh1999`, hydrogen bond lifetimes (HBL)
@@ -396,12 +392,6 @@ class WaterOrientationalRelaxation(object):
       frame where analysis ends
     dtmax : int
       Maximum dt size, `dtmax` < `tf` or it will crash.
-
-
-    .. versionadded:: 0.11.0
-
-    .. versionchanged:: 1.0.0
-       Changed `selection` keyword to `select`
     """
 
     def __init__(self, universe, select, t0, tf, dtmax, nproc=1):
@@ -498,7 +488,6 @@ class WaterOrientationalRelaxation(object):
         """
         This function gets one point of the plot C_vec vs t. It uses the
         _getOneDeltaPoint() function to calculate the average.
-
         """
         repInd = self._repeatedIndex(selection1, dt, totalFrames)
         sumsdt = 0
@@ -588,12 +577,6 @@ class AngularDistribution(object):
     axis : {'x', 'y', 'z'} (optional)
         Axis to create angle with the vector (HH, OH or dipole) and calculate
         cosine theta ['z'].
-
-
-    .. versionadded:: 0.11.0
-
-    .. versionchanged:: 1.0.0
-       Changed `selection` keyword to `select`
     """
 
     def __init__(self, universe, select, bins=40, nproc=1, axis="z"):
@@ -742,12 +725,6 @@ class MeanSquareDisplacement(object):
       frame where analysis ends
     dtmax : int
       Maximum dt size, `dtmax` < `tf` or it will crash.
-
-
-    .. versionadded:: 0.11.0
-
-    .. versionchanged:: 1.0.0
-       Changed `selection` keyword to `select`
     """
 
     def __init__(self, universe, select, t0, tf, dtmax, nproc=1):
@@ -814,7 +791,6 @@ class MeanSquareDisplacement(object):
         """
         This function gets one point of the plot C_vec vs t. It's uses the
         _getOneDeltaPoint() function to calculate the average.
-
         """
         repInd = self._repeatedIndex(selection1, dt, totalFrames)
         sumsdt = 0
@@ -907,21 +883,6 @@ class SurvivalProbability(object):
     to the `stop` keyword passed to :meth:`SurvivalProbability.run`. Unlike
     other :mod:`waterdynamics` final frame definitions
     which are `inclusive`.
-
-
-    .. versionadded:: 0.11.0
-    .. versionchanged:: 1.0.0
-       Using the MDAnalysis.lib.correlations.py to carry out the intermittency
-       and autocorrelation calculations.
-       Changed `selection` keyword to `select`.
-       Removed support for the deprecated `t0`, `tf`, and `dtmax` keywords.
-       These should instead be passed to :meth:`SurvivalProbability.run` as
-       the `start`, `stop`, and `tau_max` keywords respectively.
-       The `stop` keyword as passed to :meth:`SurvivalProbability.run` has now
-       changed behaviour and will act in an `exclusive` manner (instead of it's
-       previous `inclusive` behaviour),
-    .. versionchanged:: 2.7.0
-       Updated docs to align with discrete autocorrelation function.
     """
 
     def __init__(self, universe, select, verbose=False):
@@ -977,11 +938,6 @@ class SurvivalProbability(object):
         sp_timeseries_data: list
             raw datapoints from which the average is taken (sp_timeseries).
             Time dependancy and distribution can be extracted.
-
-
-        .. versionchanged:: 1.0.0
-           To math other analysis methods, the `stop` keyword is now exclusive
-           rather than inclusive.
         """
 
         start, stop, step = self.universe.trajectory.check_slice_indices(
