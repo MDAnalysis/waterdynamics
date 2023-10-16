@@ -1,7 +1,6 @@
 # Authors
 
-waterdynamics was originally written by Alejandro Bernardin in 2015 and was 
-present in the MDAnalysis core library from 2015 to 2024.
+waterdynamics was originally written by Alejandro Bernardin in 2015 and was present in the MDAnalysis core library from 2015 to 2024.
 
 All contributing authors are listed in this file below.
 The repository history at https://github.com/MDAnalysis/waterdynamics
