@@ -139,17 +139,6 @@
 <span id="api-documentation"></span><h1>API Documentation<a class="headerlink" href="#module-waterdynamics.waterdynamics" title="Permalink to this heading"></a></h1>
 <section id="water-dynamics-analysis-waterdynamics-waterdynamics">
 <h2>Water dynamics analysis — <a class="reference internal" href="#module-waterdynamics.waterdynamics" title="waterdynamics.waterdynamics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">waterdynamics.waterdynamics</span></code></a><a class="headerlink" href="#water-dynamics-analysis-waterdynamics-waterdynamics" title="Permalink to this heading"></a></h2>
-<dl class="field-list simple">
-<dt class="field-odd">Author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Alejandro Bernardin</p>
-</dd>
-<dt class="field-even">Year<span class="colon">:</span></dt>
-<dd class="field-even"><p>2014-2015</p>
-</dd>
-<dt class="field-odd">Copyright<span class="colon">:</span></dt>
-<dd class="field-odd"><p>GNU Public License v3</p>
-</dd>
-</dl>
 <p>This module provides functions to analyze water dynamics trajectories and water
 interactions with other molecules.  The functions in this module are: water
 orientational relaxation (WOR) <a class="footnote-reference brackets" href="#footcite-yeh1999" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, hydrogen bond lifetimes (HBL)
@@ -463,12 +452,6 @@ a unit vector along HH, OH or dipole vector.</p>
 </ul>
 </dd>
 </dl>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 0.11.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.0: </span>Changed <cite>selection</cite> keyword to <cite>select</cite></p>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="waterdynamics.waterdynamics.WaterOrientationalRelaxation.lg2">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lg2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#WaterOrientationalRelaxation.lg2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.waterdynamics.WaterOrientationalRelaxation.lg2" title="Permalink to this definition"></a></dt>
@@ -505,12 +488,6 @@ cosine theta [‘z’].</p></li>
 </ul>
 </dd>
 </dl>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 0.11.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.0: </span>Changed <cite>selection</cite> keyword to <cite>select</cite></p>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="waterdynamics.waterdynamics.AngularDistribution.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#AngularDistribution.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.waterdynamics.AngularDistribution.run" title="Permalink to this definition"></a></dt>
@@ -542,12 +519,6 @@ average distance that particles travels. The MSD is given by:</p>
 </ul>
 </dd>
 </dl>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 0.11.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.0: </span>Changed <cite>selection</cite> keyword to <cite>select</cite></p>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="waterdynamics.waterdynamics.MeanSquareDisplacement.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#MeanSquareDisplacement.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.waterdynamics.MeanSquareDisplacement.run" title="Permalink to this definition"></a></dt>
@@ -586,23 +557,6 @@ behaviour (i.e. similar to the current behaviour of <code class="xref py py-clas
 to the <cite>stop</cite> keyword passed to <a class="reference internal" href="#waterdynamics.waterdynamics.SurvivalProbability.run" title="waterdynamics.waterdynamics.SurvivalProbability.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SurvivalProbability.run()</span></code></a>. Unlike
 other <code class="xref py py-mod docutils literal notranslate"><span class="pre">waterdynamics</span></code> final frame definitions
 which are <cite>inclusive</cite>.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 0.11.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.0: </span>Using the MDAnalysis.lib.correlations.py to carry out the intermittency
-and autocorrelation calculations.
-Changed <cite>selection</cite> keyword to <cite>select</cite>.
-Removed support for the deprecated <cite>t0</cite>, <cite>tf</cite>, and <cite>dtmax</cite> keywords.
-These should instead be passed to <a class="reference internal" href="#waterdynamics.waterdynamics.SurvivalProbability.run" title="waterdynamics.waterdynamics.SurvivalProbability.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SurvivalProbability.run()</span></code></a> as
-the <cite>start</cite>, <cite>stop</cite>, and <cite>tau_max</cite> keywords respectively.
-The <cite>stop</cite> keyword as passed to <a class="reference internal" href="#waterdynamics.waterdynamics.SurvivalProbability.run" title="waterdynamics.waterdynamics.SurvivalProbability.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SurvivalProbability.run()</span></code></a> has now
-changed behaviour and will act in an <cite>exclusive</cite> manner (instead of it’s
-previous <cite>inclusive</cite> behaviour),</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 2.7.0: </span>Updated docs to align with discrete autocorrelation function.</p>
-</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="waterdynamics.waterdynamics.SurvivalProbability.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tau_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermittency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#SurvivalProbability.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.waterdynamics.SurvivalProbability.run" title="Permalink to this definition"></a></dt>
@@ -646,10 +600,6 @@ Time dependancy and distribution can be extracted.</p></li>
 </p>
 </dd>
 </dl>
-<div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.0: </span>To math other analysis methods, the <cite>stop</cite> keyword is now exclusive
-rather than inclusive.</p>
-</div>
 </dd></dl>
 
 </dd></dl>

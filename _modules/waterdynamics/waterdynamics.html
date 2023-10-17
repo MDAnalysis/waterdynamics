@@ -132,10 +132,6 @@
 <span class="sd">&quot;&quot;&quot;Water dynamics analysis --- :mod:`waterdynamics.waterdynamics`</span>
 <span class="sd">=======================================================================</span>
 
-<span class="sd">:Author: Alejandro Bernardin</span>
-<span class="sd">:Year: 2014-2015</span>
-<span class="sd">:Copyright: GNU Public License v3</span>
-
 <span class="sd">This module provides functions to analyze water dynamics trajectories and water</span>
 <span class="sd">interactions with other molecules.  The functions in this module are: water</span>
 <span class="sd">orientational relaxation (WOR) :footcite:p:`Yeh1999`, hydrogen bond lifetimes (HBL)</span>
@@ -504,12 +500,6 @@
 <span class="sd">      frame where analysis ends</span>
 <span class="sd">    dtmax : int</span>
 <span class="sd">      Maximum dt size, `dtmax` &lt; `tf` or it will crash.</span>
-
-
-<span class="sd">    .. versionadded:: 0.11.0</span>
-
-<span class="sd">    .. versionchanged:: 1.0.0</span>
-<span class="sd">       Changed `selection` keyword to `select`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -606,7 +596,6 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function gets one point of the plot C_vec vs t. It uses the</span>
 <span class="sd">        _getOneDeltaPoint() function to calculate the average.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">repInd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeatedIndex</span><span class="p">(</span><span class="n">selection1</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">totalFrames</span><span class="p">)</span>
         <span class="n">sumsdt</span> <span class="o">=</span> <span class="mi">0</span>
@@ -696,12 +685,6 @@
 <span class="sd">    axis : {&#39;x&#39;, &#39;y&#39;, &#39;z&#39;} (optional)</span>
 <span class="sd">        Axis to create angle with the vector (HH, OH or dipole) and calculate</span>
 <span class="sd">        cosine theta [&#39;z&#39;].</span>
-
-
-<span class="sd">    .. versionadded:: 0.11.0</span>
-
-<span class="sd">    .. versionchanged:: 1.0.0</span>
-<span class="sd">       Changed `selection` keyword to `select`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">):</span>
@@ -850,12 +833,6 @@
 <span class="sd">      frame where analysis ends</span>
 <span class="sd">    dtmax : int</span>
 <span class="sd">      Maximum dt size, `dtmax` &lt; `tf` or it will crash.</span>
-
-
-<span class="sd">    .. versionadded:: 0.11.0</span>
-
-<span class="sd">    .. versionchanged:: 1.0.0</span>
-<span class="sd">       Changed `selection` keyword to `select`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -922,7 +899,6 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function gets one point of the plot C_vec vs t. It&#39;s uses the</span>
 <span class="sd">        _getOneDeltaPoint() function to calculate the average.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">repInd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeatedIndex</span><span class="p">(</span><span class="n">selection1</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">totalFrames</span><span class="p">)</span>
         <span class="n">sumsdt</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1015,21 +991,6 @@
 <span class="sd">    to the `stop` keyword passed to :meth:`SurvivalProbability.run`. Unlike</span>
 <span class="sd">    other :mod:`waterdynamics` final frame definitions</span>
 <span class="sd">    which are `inclusive`.</span>
-
-
-<span class="sd">    .. versionadded:: 0.11.0</span>
-<span class="sd">    .. versionchanged:: 1.0.0</span>
-<span class="sd">       Using the MDAnalysis.lib.correlations.py to carry out the intermittency</span>
-<span class="sd">       and autocorrelation calculations.</span>
-<span class="sd">       Changed `selection` keyword to `select`.</span>
-<span class="sd">       Removed support for the deprecated `t0`, `tf`, and `dtmax` keywords.</span>
-<span class="sd">       These should instead be passed to :meth:`SurvivalProbability.run` as</span>
-<span class="sd">       the `start`, `stop`, and `tau_max` keywords respectively.</span>
-<span class="sd">       The `stop` keyword as passed to :meth:`SurvivalProbability.run` has now</span>
-<span class="sd">       changed behaviour and will act in an `exclusive` manner (instead of it&#39;s</span>
-<span class="sd">       previous `inclusive` behaviour),</span>
-<span class="sd">    .. versionchanged:: 2.7.0</span>
-<span class="sd">       Updated docs to align with discrete autocorrelation function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1085,11 +1046,6 @@
 <span class="sd">        sp_timeseries_data: list</span>
 <span class="sd">            raw datapoints from which the average is taken (sp_timeseries).</span>
 <span class="sd">            Time dependancy and distribution can be extracted.</span>
-
-
-<span class="sd">        .. versionchanged:: 1.0.0</span>
-<span class="sd">           To math other analysis methods, the `stop` keyword is now exclusive</span>
-<span class="sd">           rather than inclusive.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span>
