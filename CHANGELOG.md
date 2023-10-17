@@ -19,7 +19,7 @@ The rules for this file:
 ## [Unreleased]
 
 ### Authors
-- ianmkenney
+<!-- GitHub usernames of contributors to this release -->
 
 ### Added
 <!-- New added features -->
@@ -36,3 +36,12 @@ The rules for this file:
 ### Removed
 <!-- Removed features -->
 
+## v1.0.0
+
+### Authors
+- ianmkenney
+
+### Added
+- functionality of the MDAnalysis.analysis.waterdynamics implemented
+  in waterdynamics (PR #3)
+- documentation deployed to github pages and read the docs (PR #5 #6)
