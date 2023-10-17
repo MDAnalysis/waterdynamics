@@ -19,24 +19,25 @@ The rules for this file:
 ## [Unreleased]
 
 ### Authors
-<!-- GitHub usernames of contributors to this release -->
 
 ### Added
-<!-- New added features -->
 
 ### Fixed
-<!-- Bug fixes -->
 
 ### Changed
-<!-- Changes in existing functionality -->
-
-### Deprecated
-<!-- Soon-to-be removed features -->
 
 ### Removed
-<!-- Removed features -->
 
-## v1.0.0
+## [1.0.0] - 2023-10-17
+
+### Authors
+- ianmkenney
+
+### Fixed
+- package deployment workflow enforces correct options regarding tests
+- formatting fixes in AUTHORS.md (PR #12)
+
+## [0.1.0] - 2023-10-13
 
 The waterdynamics MDAKit was created by Ian Kenney in 2023 and is based upon
 the MDAnalysis.analysis.waterdynamics analysis module originally written by
@@ -48,5 +49,9 @@ are listed in the AUTHORS.md file.
 
 ### Added
 - the core functionality of waterdynamics (and its tests) was implemented
-  using the source code from MDAnalysis.analysis.waterdynamics (PR #3)
+  using the source code from MDAnalysis.analysis.waterdynamics (#3)
 - documentation deployed to github pages and read the docs (PR #5 #6)
+
+[Unreleased]: https://github.com/MDAnalysis/waterdynamics/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/MDAnaylsis/waterdynamics/compare/0.1.0...1.0.0
+[0.1.0]: https://github.com/MDAnalysis/waterdynamics/releases/tag/0.1.0
