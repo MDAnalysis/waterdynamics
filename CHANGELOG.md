@@ -28,10 +28,11 @@ The rules for this file:
 
 ### Removed
 
-## [1.0.0] - 2023-10-17
+## [1.0.0] - 2023-10-18
 
 ### Authors
 - ianmkenney
+- orbeckst
 
 ### Fixed
 - package deployment workflow enforces correct options regarding tests
