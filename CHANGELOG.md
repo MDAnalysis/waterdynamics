@@ -39,10 +39,12 @@ The rules for this file:
 
 ## [0.1.0] - 2023-10-13
 
-The waterdynamics MDAKit was created by Ian Kenney in 2023 and is based upon
-the MDAnalysis.analysis.waterdynamics analysis module originally written by
-Alejandro Bernardin in 2015. Additional contributors to the original source
-are listed in the AUTHORS.md file.
+The original `MDAnalysis.analysis.waterdynamics` was written by Alejandro 
+Bernardin in 2015 and had been part of MDAnalysis since release 0.11.0,
+https://docs.mdanalysis.org/2.6.1/documentation_pages/analysis/waterdynamics.html .
+Ian Kenney created the `waterdynamics` MDAKit in 2023, based on the original
+code in MDAnalysis. Additional contributors to the original source code are 
+listed in the AUTHORS.md file.
 
 ### Authors
 - ianmkenney
