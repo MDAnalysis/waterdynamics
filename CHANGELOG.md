@@ -41,7 +41,7 @@ The rules for this file:
 
 The original `MDAnalysis.analysis.waterdynamics` was written by Alejandro 
 Bernardin in 2015 and had been part of MDAnalysis since release 0.11.0,
-https://docs.mdanalysis.org/2.6.1/documentation_pages/analysis/waterdynamics.html .
+https://docs.mdanalysis.org/2.6.1/documentation_pages/analysis/waterdynamics.html.
 Ian Kenney created the `waterdynamics` MDAKit in 2023, based on the original
 code in MDAnalysis. Additional contributors to the original source code are 
 listed in the AUTHORS.md file.
