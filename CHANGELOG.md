@@ -19,20 +19,41 @@ The rules for this file:
 ## [Unreleased]
 
 ### Authors
+
+### Added
+
+### Fixed
+
+### Changed
+
+### Removed
+
+## [1.0.0] - 2023-10-17
+
+### Authors
+- ianmkenney
+
+### Fixed
+- package deployment workflow enforces correct options regarding tests
+- formatting fixes in AUTHORS.md (PR #12)
+
+## [0.1.0] - 2023-10-13
+
+The original `MDAnalysis.analysis.waterdynamics` was written by Alejandro 
+Bernardin in 2015 and had been part of MDAnalysis since release 0.11.0,
+https://docs.mdanalysis.org/2.6.1/documentation_pages/analysis/waterdynamics.html.
+Ian Kenney created the `waterdynamics` MDAKit in 2023, based on the original
+code in MDAnalysis. Additional contributors to the original source code are 
+listed in the AUTHORS.md file.
+
+### Authors
 - ianmkenney
 
 ### Added
-<!-- New added features -->
+- the core functionality of waterdynamics (and its tests) was implemented
+  using the source code from MDAnalysis.analysis.waterdynamics (#3)
+- documentation deployed to github pages and read the docs (PR #5 #6)
 
-### Fixed
-<!-- Bug fixes -->
-
-### Changed
-<!-- Changes in existing functionality -->
-
-### Deprecated
-<!-- Soon-to-be removed features -->
-
-### Removed
-<!-- Removed features -->
-
+[Unreleased]: https://github.com/MDAnalysis/waterdynamics/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/MDAnaylsis/waterdynamics/compare/0.1.0...1.0.0
+[0.1.0]: https://github.com/MDAnalysis/waterdynamics/releases/tag/0.1.0
