@@ -50,5 +50,6 @@ jobs:
       - name: pypi_deploy
         uses: MDAnalysis/pypi-deployment@main
         with:
-          package_name: 'waterdynamics'
+          tests: true
           test_deps: 'pytest MDAnalysisTests'
+          package_name: 'waterdynamics'
