@@ -17,7 +17,7 @@ jobs:
       id-token: write
     if: |
       github.repository == 'MDAnalysis/waterdynamics' &&
-      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/'))
     name: Build, upload and test pure Python wheels to TestPyPi
     runs-on: ubuntu-latest
 
