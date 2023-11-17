@@ -248,7 +248,8 @@ class AngularDistribution(object):
     vector, HH vector or dipolar vector of water molecules and a vector
     :math:`\hat n` parallel to chosen axis (z is the default value). The cosine
     is define as :math:`\cos \theta = \hat u \cdot \hat n`, where :math:`\hat
-    u` is OH, HH or dipole vector. The AD is also know as Angular Probability (AP).
+    u` is OH, HH or dipole vector. The AD is also know as Angular
+    Probability (AP).
 
 
     Parameters
