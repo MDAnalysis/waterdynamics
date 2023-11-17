@@ -19,12 +19,14 @@ The rules for this file:
 ## [Unreleased]
 
 ### Authors
+- ianmkenney
 
 ### Added
 
 ### Fixed
 
 ### Changed
+- reorganized Sphinx docs (PR #26)
 
 ### Removed
 
