@@ -13,6 +13,7 @@ This package provides classes and functions for the analysis of water dynamics a
    :caption: Contents:
 
    getting_started
+   examples
    api
 
 
