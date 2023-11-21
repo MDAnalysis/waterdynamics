@@ -32,7 +32,7 @@ or with :program:`mamba` (if you have it installed):
 From the Python Package Index
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The waterdyanmics package can be installed from PyPI with:
+The waterdynamics package can be installed from PyPI with:
 
 .. code-block:: sh
 

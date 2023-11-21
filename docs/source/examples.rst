@@ -1,8 +1,18 @@
-Class Example Usage
-===================
+Examples
+========
 
 ``waterdynamics`` operates around class based analyses.
 Find examples of their use below.
+
+HydrogenBondLifetimes
+~~~~~~~~~~~~~~~~~~~~~
+
+To analyze hydrogen bond lifetime, use
+:meth:`MDAnalysis.analysis.hydrogenbonds.hbond_analysis.HydrogenBondAnalysis.lifetime`.
+
+.. seealso::
+
+    :mod:`MDAnalysis.analysis.hydrogenbonds.hbond_analysis`
 
 WaterOrientationalRelaxation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
