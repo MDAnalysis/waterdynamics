@@ -79,6 +79,8 @@
         <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputs.html">Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 </ul>
 
@@ -109,7 +111,10 @@
              
   <section id="welcome-to-waterdynamics-s-documentation">
 <h1>Welcome to waterdynamics’s documentation!<a class="headerlink" href="#welcome-to-waterdynamics-s-documentation" title="Link to this heading"></a></h1>
-<p>This package provides classes and functions for the analysis of water dynamics and water interactions with other molecules in molecular simulations. The functions in this package are: water orientational relaxation, hydrogen bond lifetimes, angular distribution, mean square displacement, and survival probability.</p>
+<p>This package provides classes and functions for the analysis of water dynamics and water interactions with other molecules in molecular simulations. The functions in this package are: water orientational relaxation (WOR) <a class="footnote-reference brackets" href="#footcite-yeh1999" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, hydrogen bond lifetimes (HBL) <a class="footnote-reference brackets" href="#footcite-rapaport1983" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, angular distribution (AD) <a class="footnote-reference brackets" href="#footcite-grigera1995" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, mean square displacement (MSD) <a class="footnote-reference brackets" href="#footcite-brodka1994" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, and survival probability (SP) <a class="footnote-reference brackets" href="#footcite-liu2004" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>.</p>
+<p>For more information about this type of analysis please refer to
+<a class="footnote-reference brackets" href="#footcite-arayasecchi2014" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> (water in a protein cavity) and
+<a class="footnote-reference brackets" href="#footcite-milischuk2011" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> (water in a nanopore).</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -117,8 +122,26 @@
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation">Installation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#hydrogenbondlifetimes">HydrogenBondLifetimes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#waterorientationalrelaxation">WaterOrientationalRelaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#angulardistribution">AngularDistribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#meansquaredisplacement">MeanSquareDisplacement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#survivalprobability">SurvivalProbability</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="outputs.html">Outputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="outputs.html#waterorientationalrelaxation">WaterOrientationalRelaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputs.html#angulardistribution">AngularDistribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputs.html#meansquaredisplacement">MeanSquareDisplacement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputs.html#survivalprobability">SurvivalProbability</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#water-dynamics-analysis-waterdynamics-waterdynamics">Water dynamics analysis — <code class="xref py py-mod docutils literal notranslate"><span class="pre">waterdynamics.waterdynamics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#waterdynamics.AngularDistribution"><code class="docutils literal notranslate"><span class="pre">AngularDistribution</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#waterdynamics.WaterOrientationalRelaxation"><code class="docutils literal notranslate"><span class="pre">WaterOrientationalRelaxation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#waterdynamics.MeanSquareDisplacement"><code class="docutils literal notranslate"><span class="pre">MeanSquareDisplacement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#waterdynamics.SurvivalProbability"><code class="docutils literal notranslate"><span class="pre">SurvivalProbability</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -131,6 +154,38 @@
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
+<p class="rubric">References</p>
+<div class="docutils container" id="id8">
+<aside class="footnote brackets" id="footcite-yeh1999" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Yu-ling Yeh and Chung-Yuan Mou. Orientational relaxation dynamics of liquid water studied by molecular dynamics simulation. <em>The Journal of Physical Chemistry B</em>, 103(18):3699–3705, 1999. <a class="reference external" href="https://doi.org/10.1021/jp984584r">doi:10.1021/jp984584r</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-rapaport1983" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>D.C. Rapaport. Hydrogen bonds in water. <em>Molecular Physics</em>, 50(5):1151–1162, 1983. <a class="reference external" href="https://doi.org/10.1080/00268978300102931">doi:10.1080/00268978300102931</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-grigera1995" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>J. Raul Grigera, Susana G. Kalko, and Jorge Fischbarg. Wall−water interface. a molecular dynamics study. <em>Langmuir</em>, 12(1):154–158, 1996. <a class="reference external" href="https://doi.org/10.1021/la9408681">doi:10.1021/la9408681</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-brodka1994" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Aleksander Bródka. Diffusion in restricted volume. <em>Molecular Physics</em>, 82(5):1075–1078, 1994. <a class="reference external" href="https://doi.org/10.1080/00268979400100764">doi:10.1080/00268979400100764</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-liu2004" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p>Pu Liu, Edward Harder, and B. J. Berne. On the calculation of diffusion coefficients in confined fluids and interfaces with an application to the liquid−vapor interface of water. <em>The Journal of Physical Chemistry B</em>, 108(21):6595–6602, 2004. <a class="reference external" href="https://doi.org/10.1021/jp0375057">doi:10.1021/jp0375057</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-arayasecchi2014" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p>Raul Araya-Secchi, Tomas Perez-Acle, Seung-gu Kang, Tien Huynh, Alejandro Bernardin, Yerko Escalona, Jose-Antonio Garate, Agustin D. Martínez, Isaac E. García, Juan C. Sáez, and Ruhong Zhou. Characterization of a novel water pocket inside the human cx26 hemichannel structure. <em>Biophysical Journal</em>, 107(3):599–612, 2014. <a class="reference external" href="https://doi.org/10.1016/j.bpj.2014.05.037">doi:10.1016/j.bpj.2014.05.037</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-milischuk2011" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p>Anatoli A. Milischuk and Branka M. Ladanyi. Structure and dynamics of water confined in silica nanopores. <em>The Journal of Chemical Physics</em>, 135(17):174709, 2011. <a class="reference external" href="https://doi.org/10.1063/1.3657408">doi:10.1063/1.3657408</a>.</p>
+</aside>
+</aside>
+</div>
 </section>
 
 

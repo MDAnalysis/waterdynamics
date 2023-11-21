@@ -77,6 +77,8 @@
         <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../outputs.html">Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
 </ul>
 
@@ -143,320 +145,6 @@
 <span class="sd">:footcite:p:`ArayaSecchi2014` (water in a protein cavity) and</span>
 <span class="sd">:footcite:p:`Milischuk2011` (water in a nanopore).</span>
 
-
-
-<span class="sd">Example use of the analysis classes</span>
-<span class="sd">-----------------------------------</span>
-
-<span class="sd">HydrogenBondLifetimes</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">To analyse hydrogen bond lifetime, use</span>
-<span class="sd">:meth:`MDAnalysis.analysis.hydrogenbonds.hbond_analysis.HydrogenBondAnalysis.lifetime`.</span>
-
-<span class="sd">See Also</span>
-<span class="sd">--------</span>
-<span class="sd">:mod:`MDAnalysis.analysis.hydrogenbonds.hbond_analysis`</span>
-
-
-<span class="sd">WaterOrientationalRelaxation</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Analyzing water orientational relaxation (WOR)</span>
-<span class="sd">:class:`WaterOrientationalRelaxation`. In this case we are analyzing &quot;how fast&quot;</span>
-<span class="sd">water molecules are rotating/changing direction. If WOR is very stable we can</span>
-<span class="sd">assume that water molecules are rotating/changing direction very slow, on the</span>
-<span class="sd">other hand, if WOR decay very fast, we can assume that water molecules are</span>
-<span class="sd">rotating/changing direction very fast::</span>
-
-<span class="sd">  import MDAnalysis</span>
-<span class="sd">  from waterdynamics import WaterOrientationalRelaxation as WOR</span>
-
-<span class="sd">  u = MDAnalysis.Universe(pdb, trajectory)</span>
-<span class="sd">  select = &quot;byres name OH2 and sphzone 6.0 protein and resid 42&quot;</span>
-<span class="sd">  WOR_analysis = WOR(universe, select, 0, 1000, 20)</span>
-<span class="sd">  WOR_analysis.run()</span>
-<span class="sd">  time = 0</span>
-<span class="sd">  #now we print the data ready to plot. The first two columns are WOR_OH vs t plot,</span>
-<span class="sd">  #the second two columns are WOR_HH vs t graph and the third two columns are WOR_dip vs t graph</span>
-<span class="sd">  for WOR_OH, WOR_HH, WOR_dip in WOR_analysis.timeseries:</span>
-<span class="sd">        print(&quot;{time} {WOR_OH} {time} {WOR_HH} {time} {WOR_dip}&quot;.format(time=time, WOR_OH=WOR_OH, WOR_HH=WOR_HH,WOR_dip=WOR_dip))</span>
-<span class="sd">        time += 1</span>
-
-<span class="sd">  #now, if we want, we can plot our data</span>
-<span class="sd">  plt.figure(1,figsize=(18, 6))</span>
-
-<span class="sd">  #WOR OH</span>
-<span class="sd">  plt.subplot(131)</span>
-<span class="sd">  plt.xlabel(&#39;time&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;WOR&#39;)</span>
-<span class="sd">  plt.title(&#39;WOR OH&#39;)</span>
-<span class="sd">  plt.plot(range(0,time),[column[0] for column in WOR_analysis.timeseries])</span>
-
-<span class="sd">  #WOR HH</span>
-<span class="sd">  plt.subplot(132)</span>
-<span class="sd">  plt.xlabel(&#39;time&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;WOR&#39;)</span>
-<span class="sd">  plt.title(&#39;WOR HH&#39;)</span>
-<span class="sd">  plt.plot(range(0,time),[column[1] for column in WOR_analysis.timeseries])</span>
-
-<span class="sd">  #WOR dip</span>
-<span class="sd">  plt.subplot(133)</span>
-<span class="sd">  plt.xlabel(&#39;time&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;WOR&#39;)</span>
-<span class="sd">  plt.title(&#39;WOR dip&#39;)</span>
-<span class="sd">  plt.plot(range(0,time),[column[2] for column in WOR_analysis.timeseries])</span>
-
-<span class="sd">  plt.show()</span>
-
-<span class="sd">where t0 = 0, tf = 1000 and dtmax = 20. In this way we create 20 windows</span>
-<span class="sd">timesteps (20 values in the x axis), the first window is created with 1000</span>
-<span class="sd">timestep average (1000/1), the second window is created with 500 timestep</span>
-<span class="sd">average(1000/2), the third window is created with 333 timestep average (1000/3)</span>
-<span class="sd">and so on.</span>
-
-<span class="sd">AngularDistribution</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Analyzing angular distribution (AD) :class:`AngularDistribution` for OH vector,</span>
-<span class="sd">HH vector and dipole vector. It returns a line histogram with vector</span>
-<span class="sd">orientation preference. A straight line in the output plot means no</span>
-<span class="sd">preferential orientation in water molecules. In this case we are analyzing if</span>
-<span class="sd">water molecules have some orientational preference, in this way we can see if</span>
-<span class="sd">water molecules are under an electric field or if they are interacting with</span>
-<span class="sd">something (residue, protein, etc)::</span>
-
-<span class="sd">  import MDAnalysis</span>
-<span class="sd">  from waterdynamics import AngularDistribution as AD</span>
-
-<span class="sd">  u = MDAnalysis.Universe(pdb, trajectory)</span>
-<span class="sd">  selection = &quot;byres name OH2 and sphzone 6.0 (protein and (resid 42 or resid 26) )&quot;</span>
-<span class="sd">  bins = 30</span>
-<span class="sd">  AD_analysis = AD(universe,selection,bins)</span>
-<span class="sd">  AD_analysis.run()</span>
-<span class="sd">  #now we print data ready to graph. The first two columns are P(cos(theta)) vs cos(theta) for OH vector ,</span>
-<span class="sd">  #the seconds two columns are P(cos(theta)) vs cos(theta) for HH vector and thirds two columns</span>
-<span class="sd">  #are P(cos(theta)) vs cos(theta) for dipole vector</span>
-<span class="sd">  for bin in range(bins):</span>
-<span class="sd">        print(&quot;{AD_analysisOH} {AD_analysisHH} {AD_analysisDip}&quot;.format(AD_analysis.graph0=AD_analysis.graph[0][bin], AD_analysis.graph1=AD_analysis.graph[1][bin],AD_analysis.graph2=AD_analysis.graph[2][bin]))</span>
-
-<span class="sd">  #and if we want to graph our results</span>
-<span class="sd">  plt.figure(1,figsize=(18, 6))</span>
-
-<span class="sd">  #AD OH</span>
-<span class="sd">  plt.subplot(131)</span>
-<span class="sd">  plt.xlabel(&#39;cos theta&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;P(cos theta)&#39;)</span>
-<span class="sd">  plt.title(&#39;PDF cos theta for OH&#39;)</span>
-<span class="sd">  plt.plot([float(column.split()[0]) for column in AD_analysis.graph[0][:-1]],[float(column.split()[1]) for column in AD_analysis.graph[0][:-1]])</span>
-
-<span class="sd">  #AD HH</span>
-<span class="sd">  plt.subplot(132)</span>
-<span class="sd">  plt.xlabel(&#39;cos theta&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;P(cos theta)&#39;)</span>
-<span class="sd">  plt.title(&#39;PDF cos theta for HH&#39;)</span>
-<span class="sd">  plt.plot([float(column.split()[0]) for column in AD_analysis.graph[1][:-1]],[float(column.split()[1]) for column in AD_analysis.graph[1][:-1]])</span>
-
-<span class="sd">  #AD dip</span>
-<span class="sd">  plt.subplot(133)</span>
-<span class="sd">  plt.xlabel(&#39;cos theta&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;P(cos theta)&#39;)</span>
-<span class="sd">  plt.title(&#39;PDF cos theta for dipole&#39;)</span>
-<span class="sd">  plt.plot([float(column.split()[0]) for column in AD_analysis.graph[2][:-1]],[float(column.split()[1]) for column in AD_analysis.graph[2][:-1]])</span>
-
-<span class="sd">  plt.show()</span>
-
-
-<span class="sd">where `P(cos(theta))` is the angular distribution or angular probabilities.</span>
-
-
-<span class="sd">MeanSquareDisplacement</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Analyzing mean square displacement (MSD) :class:`MeanSquareDisplacement` for</span>
-<span class="sd">water molecules. In this case we are analyzing the average distance that water</span>
-<span class="sd">molecules travels inside protein in XYZ direction (cylindric zone of radius</span>
-<span class="sd">11[nm], Zmax 4.0[nm] and Zmin -8.0[nm]). A strong rise mean a fast movement of</span>
-<span class="sd">water molecules, a weak rise mean slow movement of particles::</span>
-
-<span class="sd">  import MDAnalysis</span>
-<span class="sd">  from waterdynamics import MeanSquareDisplacement as MSD</span>
-
-<span class="sd">  u = MDAnalysis.Universe(pdb, trajectory)</span>
-<span class="sd">  select = &quot;byres name OH2 and cyzone 11.0 4.0 -8.0 protein&quot;</span>
-<span class="sd">  MSD_analysis = MSD(universe, select, 0, 1000, 20)</span>
-<span class="sd">  MSD_analysis.run()</span>
-<span class="sd">  #now we print data ready to graph. The graph</span>
-<span class="sd">  #represents MSD vs t</span>
-<span class="sd">  time = 0</span>
-<span class="sd">  for msd in MSD_analysis.timeseries:</span>
-<span class="sd">        print(&quot;{time} {msd}&quot;.format(time=time, msd=msd))</span>
-<span class="sd">        time += 1</span>
-
-<span class="sd">  #Plot</span>
-<span class="sd">  plt.xlabel(&#39;time&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;MSD&#39;)</span>
-<span class="sd">  plt.title(&#39;MSD&#39;)</span>
-<span class="sd">  plt.plot(range(0,time),MSD_analysis.timeseries)</span>
-<span class="sd">  plt.show()</span>
-
-
-<span class="sd">.. _SP-examples:</span>
-
-<span class="sd">SurvivalProbability</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Analyzing survival probability (SP) :class:`SurvivalProbability` of molecules.</span>
-<span class="sd">In this case we are analyzing how long water molecules remain in a</span>
-<span class="sd">sphere of radius 12.3 centered in the geometrical center of resid 42 and 26.</span>
-<span class="sd">A slow decay of SP means a long permanence time of water molecules in</span>
-<span class="sd">the zone, on the other hand, a fast decay means a short permanence time::</span>
-
-<span class="sd">  import MDAnalysis</span>
-<span class="sd">  from waterdynamics import SurvivalProbability as SP</span>
-<span class="sd">  import matplotlib.pyplot as plt</span>
-
-<span class="sd">  universe = MDAnalysis.Universe(pdb, trajectory)</span>
-<span class="sd">  select = &quot;byres name OH2 and sphzone 12.3 (resid 42 or resid 26) &quot;</span>
-<span class="sd">  sp = SP(universe, select, verbose=True)</span>
-<span class="sd">  sp.run(start=0, stop=101, tau_max=20)</span>
-<span class="sd">  tau_timeseries = sp.tau_timeseries</span>
-<span class="sd">  sp_timeseries = sp.sp_timeseries</span>
-
-<span class="sd">  # print in console</span>
-<span class="sd">  for tau, sp in zip(tau_timeseries, sp_timeseries):</span>
-<span class="sd">        print(&quot;{time} {sp}&quot;.format(time=tau, sp=sp))</span>
-
-<span class="sd">  # plot</span>
-<span class="sd">  plt.xlabel(&#39;Time&#39;)</span>
-<span class="sd">  plt.ylabel(&#39;SP&#39;)</span>
-<span class="sd">  plt.title(&#39;Survival Probability&#39;)</span>
-<span class="sd">  plt.plot(tau_timeseries, sp_timeseries)</span>
-<span class="sd">  plt.show()</span>
-
-<span class="sd">One should note that the `stop` keyword as used in the above example has an</span>
-<span class="sd">`exclusive` behaviour, i.e. here the final frame used will be 100 not 101.</span>
-<span class="sd">This behaviour is aligned with :class:`AnalysisBase` but currently differs from</span>
-<span class="sd">other :mod:`waterdynamics` classes, which all exhibit</span>
-<span class="sd">`inclusive` behaviour for their final frame selections.</span>
-
-<span class="sd">Another example applies to the situation where you work with many different &quot;residues&quot;.</span>
-<span class="sd">Here we calculate the SP of a potassium ion around each lipid in a membrane and</span>
-<span class="sd">average the results. In this example, if the SP analysis were run without treating each lipid</span>
-<span class="sd">separately, potassium ions may hop from one lipid to another and still be counted as remaining</span>
-<span class="sd">in the specified region. That is, the survival probability of the potassium ion around the</span>
-<span class="sd">entire membrane will be calculated.</span>
-
-<span class="sd">Note, for this example, it is advisable to use `Universe(in_memory=True)` to ensure that the</span>
-<span class="sd">simulation is not being reloaded into memory for each lipid::</span>
-
-<span class="sd">  import MDAnalysis as mda</span>
-<span class="sd">  from waterdynamics import SurvivalProbability as SP</span>
-<span class="sd">  import numpy as np</span>
-
-<span class="sd">  u = mda.Universe(&quot;md.gro&quot;, &quot;md100ns.xtc&quot;, in_memory=True)</span>
-<span class="sd">  lipids = u.select_atoms(&#39;resname LIPIDS&#39;)</span>
-<span class="sd">  joined_sp_timeseries = [[] for _ in range(20)]</span>
-<span class="sd">  for lipid in lipids.residues:</span>
-<span class="sd">      print(&quot;Lipid ID: %d&quot; % lipid.resid)</span>
-
-<span class="sd">      select = &quot;resname POTASSIUM and around 3.5 (resid %d and name O13 O14) &quot; % lipid.resid</span>
-<span class="sd">      sp = SP(u, select, verbose=True)</span>
-<span class="sd">      sp.run(tau_max=20)</span>
-
-<span class="sd">      # Raw SP points for each tau:</span>
-<span class="sd">      for sps, new_sps in zip(joined_sp_timeseries, sp.sp_timeseries_data):</span>
-<span class="sd">          sps.extend(new_sps)</span>
-
-<span class="sd">  # average all SP datapoints</span>
-<span class="sd">  sp_data = [np.mean(sp) for sp in joined_sp_timeseries]</span>
-
-<span class="sd">  for tau, sp in zip(range(1, tau_max + 1), sp_data):</span>
-<span class="sd">      print(&quot;{time} {sp}&quot;.format(time=tau, sp=sp))</span>
-
-<span class="sd">.. _Output:</span>
-
-<span class="sd">Output</span>
-<span class="sd">------</span>
-
-<span class="sd">WaterOrientationalRelaxation</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Water orientational relaxation (WOR) data is returned per window timestep,</span>
-<span class="sd">which is stored in :attr:`WaterOrientationalRelaxation.timeseries`::</span>
-
-<span class="sd">    results = [</span>
-<span class="sd">        [ # time t0</span>
-<span class="sd">            &lt;WOR_OH&gt;, &lt;WOR_HH&gt;, &lt;WOR_dip&gt;</span>
-<span class="sd">        ],</span>
-<span class="sd">        [ # time t1</span>
-<span class="sd">            &lt;WOR_OH&gt;, &lt;WOR_HH&gt;, &lt;WOR_dip&gt;</span>
-<span class="sd">        ],</span>
-<span class="sd">        ...</span>
-<span class="sd">     ]</span>
-
-<span class="sd">AngularDistribution</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Angular distribution (AD) data is returned per vector, which is stored in</span>
-<span class="sd">:attr:`AngularDistribution.graph`. In fact, AngularDistribution returns a</span>
-<span class="sd">histogram::</span>
-
-<span class="sd">    results = [</span>
-<span class="sd">        [ # OH vector values</span>
-<span class="sd">          # the values are order in this way: &lt;x_axis  y_axis&gt;</span>
-<span class="sd">            &lt;cos_theta0 ang_distr0&gt;, &lt;cos_theta1 ang_distr1&gt;, ...</span>
-<span class="sd">        ],</span>
-<span class="sd">        [ # HH vector values</span>
-<span class="sd">            &lt;cos_theta0 ang_distr0&gt;, &lt;cos_theta1 ang_distr1&gt;, ...</span>
-<span class="sd">        ],</span>
-<span class="sd">        [ # dip vector values</span>
-<span class="sd">           &lt;cos_theta0 ang_distr0&gt;, &lt;cos_theta1 ang_distr1&gt;, ...</span>
-<span class="sd">        ],</span>
-<span class="sd">     ]</span>
-
-<span class="sd">MeanSquareDisplacement</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Mean Square Displacement (MSD) data is returned in a list, which each element</span>
-<span class="sd">represents a MSD value in its respective window timestep. Data is stored in</span>
-<span class="sd">:attr:`MeanSquareDisplacement.timeseries`::</span>
-
-<span class="sd">    results = [</span>
-<span class="sd">         #MSD values orders by window timestep</span>
-<span class="sd">            &lt;MSD_t0&gt;, &lt;MSD_t1&gt;, ...</span>
-<span class="sd">     ]</span>
-
-<span class="sd">SurvivalProbability</span>
-<span class="sd">~~~~~~~~~~~~~~~~~~~</span>
-
-<span class="sd">Survival Probability (SP) computes two lists: a list of taus (:attr:`SurvivalProbability.tau_timeseries`) and a list of</span>
-<span class="sd">the corresponding survival probabilities (:attr:`SurvivalProbability.sp_timeseries`).</span>
-
-<span class="sd">    results = [ tau1, tau2, ..., tau_n ], [ sp_tau1, sp_tau2, ..., sp_tau_n]</span>
-
-<span class="sd">Additionally, a list :attr:`SurvivalProbability.sp_timeseries_data`, is provided which contains</span>
-<span class="sd">a list of all SPs calculated for each tau. This can be used to compute the distribution or time dependence of SP, etc.</span>
-
-<span class="sd">Classes</span>
-<span class="sd">--------</span>
-
-<span class="sd">.. autoclass:: WaterOrientationalRelaxation</span>
-<span class="sd">   :members:</span>
-<span class="sd">   :inherited-members:</span>
-
-<span class="sd">.. autoclass:: AngularDistribution</span>
-<span class="sd">   :members:</span>
-<span class="sd">   :inherited-members:</span>
-
-<span class="sd">.. autoclass:: MeanSquareDisplacement</span>
-<span class="sd">   :members:</span>
-<span class="sd">   :inherited-members:</span>
-
-<span class="sd">.. autoclass:: SurvivalProbability</span>
-<span class="sd">   :members:</span>
-<span class="sd">   :inherited-members:</span>
-
 <span class="sd">.. rubric:: References</span>
 
 <span class="sd">.. footbibliography::</span>
@@ -474,7 +162,7 @@
 
 
 <div class="viewcode-block" id="WaterOrientationalRelaxation">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.WaterOrientationalRelaxation">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.WaterOrientationalRelaxation">[docs]</a>
 <span class="k">class</span> <span class="nc">WaterOrientationalRelaxation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Water orientation relaxation analysis</span>
 
@@ -639,7 +327,7 @@
         <span class="k">return</span> <span class="n">selection</span>
 
 <div class="viewcode-block" id="WaterOrientationalRelaxation.lg2">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.WaterOrientationalRelaxation.lg2">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.WaterOrientationalRelaxation.lg2">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">lg2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Second Legendre polynomial&quot;&quot;&quot;</span>
@@ -647,7 +335,7 @@
 
 
 <div class="viewcode-block" id="WaterOrientationalRelaxation.run">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.WaterOrientationalRelaxation.run">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.WaterOrientationalRelaxation.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze trajectory and produce timeseries&quot;&quot;&quot;</span>
 
@@ -672,7 +360,7 @@
 
 
 <div class="viewcode-block" id="AngularDistribution">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.AngularDistribution">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.AngularDistribution">[docs]</a>
 <span class="k">class</span> <span class="nc">AngularDistribution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Angular distribution function analysis</span>
 
@@ -681,8 +369,8 @@
 <span class="sd">    vector, HH vector or dipolar vector of water molecules and a vector</span>
 <span class="sd">    :math:`\hat n` parallel to chosen axis (z is the default value). The cosine</span>
 <span class="sd">    is define as :math:`\cos \theta = \hat u \cdot \hat n`, where :math:`\hat</span>
-<span class="sd">    u` is OH, HH or dipole vector.  It creates a histogram and returns a list</span>
-<span class="sd">    of lists, see Output_. The AD is also know as Angular Probability (AP).</span>
+<span class="sd">    u` is OH, HH or dipole vector. The AD is also know as Angular</span>
+<span class="sd">    Probability (AP).</span>
 
 
 <span class="sd">    Parameters</span>
@@ -782,7 +470,7 @@
         <span class="k">return</span> <span class="n">a</span>
 
 <div class="viewcode-block" id="AngularDistribution.run">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.AngularDistribution.run">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.AngularDistribution.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to evaluate the angular distribution of cos(theta)&quot;&quot;&quot;</span>
 
@@ -820,7 +508,7 @@
 
 
 <div class="viewcode-block" id="MeanSquareDisplacement">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.MeanSquareDisplacement">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.MeanSquareDisplacement">[docs]</a>
 <span class="k">class</span> <span class="nc">MeanSquareDisplacement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Mean square displacement analysis</span>
 
@@ -954,7 +642,7 @@
         <span class="k">return</span> <span class="n">selection</span>
 
 <div class="viewcode-block" id="MeanSquareDisplacement.run">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.MeanSquareDisplacement.run">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.MeanSquareDisplacement.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze trajectory and produce timeseries&quot;&quot;&quot;</span>
 
@@ -978,7 +666,7 @@
 
 
 <div class="viewcode-block" id="SurvivalProbability">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.SurvivalProbability">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.SurvivalProbability">[docs]</a>
 <span class="k">class</span> <span class="nc">SurvivalProbability</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Survival Probability (SP) gives the probability for a group of particles to remain</span>
@@ -1001,7 +689,7 @@
 <span class="sd">    select : str</span>
 <span class="sd">      Selection string; any selection is allowed. With this selection you</span>
 <span class="sd">      define the region/zone where to analyze, e.g.: &quot;resname SOL and around 5 </span>
-<span class="sd">      (resid 10)&quot;. See `SP-examples`_.</span>
+<span class="sd">      (resid 10)&quot;.</span>
 <span class="sd">    verbose : Boolean, optional</span>
 <span class="sd">      When True, prints progress and comments to the console.</span>
 
@@ -1022,7 +710,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
 
 <div class="viewcode-block" id="SurvivalProbability.run">
-<a class="viewcode-back" href="../../api.html#waterdynamics.waterdynamics.SurvivalProbability.run">[docs]</a>
+<a class="viewcode-back" href="../../api.html#waterdynamics.SurvivalProbability.run">[docs]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tau_max</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">residues</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">intermittency</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>

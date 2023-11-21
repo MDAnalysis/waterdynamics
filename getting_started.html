@@ -36,7 +36,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Documentation" href="api.html" />
+    <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Welcome to waterdynamics’s documentation!" href="index.html" /> 
 </head>
 
@@ -81,12 +81,15 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pypi">PyPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-conda-forge">From conda-forge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-the-python-package-index">From the Python Package Index</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#from-source">From source</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputs.html">Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 </ul>
 
@@ -117,17 +120,34 @@
              
   <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
-<p>This page details how to get started with waterdynamics.</p>
+<p>Install the <code class="docutils literal notranslate"><span class="pre">waterdynamics</span></code> package by any of the methods described below:</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
-<section id="pypi">
-<h3>PyPi<a class="headerlink" href="#pypi" title="Link to this heading"></a></h3>
-<p>The waterdyanmics package can be installed from PyPI with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>waterdynamics
+<section id="from-conda-forge">
+<h3>From conda-forge<a class="headerlink" href="#from-conda-forge" title="Link to this heading"></a></h3>
+<p>Install <a class="reference external" href="https://anaconda.org/conda-forge/waterdynamics">waterdynamics from the conda-forge channel</a>
+by first adding <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> to you channels with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>conda-forge
+conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
+</pre></div>
+</div>
+<p>Once the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel has been enabled, <code class="docutils literal notranslate"><span class="pre">waterdynamics</span></code> can be installed with <strong class="program">conda</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>waterdynamics
+</pre></div>
+</div>
+<p>or with <strong class="program">mamba</strong> (if you have it installed):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mamba<span class="w"> </span>install<span class="w"> </span>waterdynamics
+</pre></div>
+</div>
+</section>
+<section id="from-the-python-package-index">
+<h3>From the Python Package Index<a class="headerlink" href="#from-the-python-package-index" title="Link to this heading"></a></h3>
+<p>The waterdynamics package can be installed from PyPI with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>waterdynamics
 </pre></div>
 </div>
 <p>If you would like to test your installation, use the <cite>test</cite> optional dependencies and run the tests:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;waterdynamics[test]&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;waterdynamics[test]&quot;</span>
 pytest<span class="w"> </span>--pyargs<span class="w"> </span>waterdynamics.tests
 </pre></div>
 </div>
@@ -135,13 +155,13 @@ pytest<span class="w"> </span>--pyargs<span class="w"> </span>waterdynamics.test
 <section id="from-source">
 <h3>From source<a class="headerlink" href="#from-source" title="Link to this heading"></a></h3>
 <p>If you want the latest (non-release) version of waterdynamics, you should install the package from source.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/MDAnalysis/waterdynamics
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/MDAnalysis/waterdynamics
 <span class="nb">cd</span><span class="w"> </span>waterdynamics
 pip<span class="w"> </span>install<span class="w"> </span>.
 </pre></div>
 </div>
 <p>If you want to run tests on your installation, install the <cite>test</cite> dependencies and run the tests:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;.[test]&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;.[test]&quot;</span>
 pytest<span class="w"> </span>--pyargs<span class="w"> </span>waterdynamics.tests
 </pre></div>
 </div>
@@ -154,7 +174,7 @@ pytest<span class="w"> </span>--pyargs<span class="w"> </span>waterdynamics.test
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Welcome to waterdynamics’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
