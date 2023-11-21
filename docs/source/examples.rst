@@ -3,6 +3,7 @@ Examples
 
 ``waterdynamics`` operates around class based analyses.
 Find examples of their use below.
+For an explanation of the classes' outputs, see the `outputs <outputs.html>`_ page.
 
 HydrogenBondLifetimes
 ~~~~~~~~~~~~~~~~~~~~~
@@ -70,19 +71,6 @@ timestep average (1000/1), the second window is created with 500 timestep
 average(1000/2), the third window is created with 333 timestep average (1000/3)
 and so on.
 
-Water orientational relaxation (WOR) data is returned per window timestep,
-which is stored in :attr:`WaterOrientationalRelaxation.timeseries`::
-
-    results = [
-        [ # time t0
-            <WOR_OH>, <WOR_HH>, <WOR_dip>
-        ],
-        [ # time t1
-            <WOR_OH>, <WOR_HH>, <WOR_dip>
-        ],
-        ...
-     ]
-
 AngularDistribution
 ~~~~~~~~~~~~~~~~~~~
 
@@ -137,28 +125,10 @@ something (residue, protein, etc)::
 
 where `P(cos(theta))` is the angular distribution or angular probabilities.
 
-Angular distribution (AD) data is returned per vector, which is stored in
-:attr:`AngularDistribution.graph`. In fact, AngularDistribution returns a
-histogram::
-
-    results = [
-        [ # OH vector values
-          # the values are order in this way: <x_axis  y_axis>
-            <cos_theta0 ang_distr0>, <cos_theta1 ang_distr1>, ...
-        ],
-        [ # HH vector values
-            <cos_theta0 ang_distr0>, <cos_theta1 ang_distr1>, ...
-        ],
-        [ # dip vector values
-           <cos_theta0 ang_distr0>, <cos_theta1 ang_distr1>, ...
-        ],
-     ]
-
-
 MeanSquareDisplacement
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Analyzing mean square displacement (MSD) :class:`MeanSquareDisplacement` for
+Analyzing mean square displacement (MSD) :class:`~waterdynamics.MeanSquareDisplacement` for
 water molecules. In this case we are analyzing the average distance that water
 molecules travels inside protein in XYZ direction (cylindric zone of radius
 11[nm], Zmax 4.0[nm] and Zmin -8.0[nm]). A strong rise mean a fast movement of
@@ -184,15 +154,6 @@ water molecules, a weak rise mean slow movement of particles::
   plt.title('MSD')
   plt.plot(range(0,time),MSD_analysis.timeseries)
   plt.show()
-
-Mean Square Displacement (MSD) data is returned in a list, which each element
-represents a MSD value in its respective window timestep. Data is stored in
-:attr:`MeanSquareDisplacement.timeseries`::
-
-    results = [
-         #MSD values orders by window timestep
-            <MSD_t0>, <MSD_t1>, ...
-     ]
 
 .. _SP-examples:
 
@@ -266,12 +227,3 @@ simulation is not being reloaded into memory for each lipid::
 
   for tau, sp in zip(range(1, tau_max + 1), sp_data):
       print("{time} {sp}".format(time=tau, sp=sp))
-
-Survival Probability (SP) computes two lists: a list of taus (:attr:`SurvivalProbability.tau_timeseries`) and a list of
-the corresponding survival probabilities (:attr:`SurvivalProbability.sp_timeseries`).
-
-    results = [ tau1, tau2, ..., tau_n ], [ sp_tau1, sp_tau2, ..., sp_tau_n]
-
-Additionally, a list :attr:`SurvivalProbability.sp_timeseries_data`, is provided which contains
-a list of all SPs calculated for each tau. This can be used to compute the distribution or time dependence of SP, etc.
-

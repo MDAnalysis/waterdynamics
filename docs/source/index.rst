@@ -18,6 +18,7 @@ For more information about this type of analysis please refer to
 
    getting_started
    examples
+   outputs
    api
 
 
