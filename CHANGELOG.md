@@ -20,13 +20,17 @@ The rules for this file:
 
 ### Authors
 - ianmkenney
+- IAlibay
 
 ### Added
+- Support for Python 3.12 (PR #28)
 
 ### Fixed
+- Removed import of analysis.hbonds and associated import warning (PR #28)
 
 ### Changed
 - reorganized Sphinx docs (PR #26)
+- switch from versioneer to versioningit (PR #28)
 
 ### Removed
 
