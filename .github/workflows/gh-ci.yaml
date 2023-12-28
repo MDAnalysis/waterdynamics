@@ -159,7 +159,7 @@ jobs:
 
     - name: Build package
       run: |
-        python -m pipx run buid --sdist
+        python -m pipx run build --sdist
 
     - name: Check package build
       run: |
