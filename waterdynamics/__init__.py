@@ -4,7 +4,6 @@ Analysis of water dynamics in molecular dynamics trajectories and water interact
 """
 
 # Add imports here
-from ._version import get_versions
 from .waterdynamics import (
     WaterOrientationalRelaxation,
     AngularDistribution,
@@ -12,8 +11,6 @@ from .waterdynamics import (
     SurvivalProbability,
 )
 
-# Handle versioneer
-versions = get_versions()
-__version__ = versions['version']
-__git_revision__ = versions['full-revisionid']
-del get_versions, versions
+# Handle version
+from importlib.metadata import version
+__version__ = version("waterdynamics")

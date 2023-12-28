@@ -40,7 +40,6 @@ For more information about this type of analysis please refer to
 .. footbibliography::
 """
 from MDAnalysis.lib.correlations import autocorrelation, correct_intermittency
-import MDAnalysis.analysis.hbonds
 from itertools import zip_longest
 import logging
 import warnings
