@@ -155,11 +155,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install setuptools cython numpy twine
+        pip install pipx twine
 
     - name: Build package
       run: |
-        python setup.py sdist
+        python -m pipx run build --sdist
 
     - name: Check package build
       run: |

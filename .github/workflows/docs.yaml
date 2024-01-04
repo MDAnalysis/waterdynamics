@@ -39,7 +39,6 @@ jobs:
     - name: Build and install package
       run: |
           mamba env update -n test -f devtools/conda-envs/test_env.yaml
-          python setup.py build_ext -i
           python -m pip install -e .
 
     - name: build docs
