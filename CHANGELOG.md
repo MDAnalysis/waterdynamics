@@ -16,11 +16,24 @@ The rules for this file:
   * accompany each entry with github issue/PR number (Issue #xyz)
 -->
 
+## [Unreleased]
+
+### Authors
+- fiona-naughton
+
+### Added
+
+### Fixed
+
+### Changed
+ - update changelog (PR #32)
+
 ## [1.1.0] - 2024-01-11
 
 ### Authors
 - ianmkenney
 - IAlibay
+- fiona-naughton
 
 ### Added
 - Support for Python 3.12 (PR #28)

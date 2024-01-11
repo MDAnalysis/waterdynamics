@@ -51,3 +51,6 @@ The rules for this file:
 - Jennifer A Clark <@jaclark5>
 - Lily Wang <@lilyminium>
 - Ian Kenney <@ianmkenney>
+
+**2024**
+- Fiona Naughton <@fiona-naughton>
