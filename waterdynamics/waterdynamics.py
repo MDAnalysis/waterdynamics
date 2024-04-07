@@ -62,7 +62,8 @@ class WaterOrientationalRelaxation(object):
         C_{\hat u}(\tau)=\langle \mathit{P}_2[\mathbf{\hat{u}}(t_0)\cdot\mathbf{\hat{u}}(t_0+\tau)]\rangle
 
     where :math:`P_2=(3x^2-1)/2` is the second-order Legendre polynomial and :math:`\hat{u}` is
-    a unit vector along HH, OH or dipole vector.
+    a unit vector along HH, OH or dipole vector. Another option is to select the first-order Legendre
+    polynomial, :math:`P_1=x`.
 
 
     Parameters
@@ -77,15 +78,21 @@ class WaterOrientationalRelaxation(object):
       frame where analysis ends
     dtmax : int
       Maximum dt size, `dtmax` < `tf` or it will crash.
+    order : 1 or 2 (default)
+      first- or second-order Legendre polynomial
     """
 
-    def __init__(self, universe, select, t0, tf, dtmax, nproc=1):
+    def __init__(self, universe, select, t0, tf, dtmax, nproc=1, order=2):
         self.universe = universe
         self.selection = select
         self.t0 = t0
         self.tf = tf
         self.dtmax = dtmax
         self.nproc = nproc
+        if order != 1 and order != 2:
+            raise ValueError(f"order = {order} but only first- or second-order Legendre polynomial is allowed.")
+        else:
+            self.order = order
         self.timeseries = None
 
     def _repeatedIndex(self, selection, dt, totalFrames):
@@ -161,9 +168,14 @@ class WaterOrientationalRelaxation(object):
                               dipVectorp[1] / normdipVectorp,
                               dipVectorp[2] / normdipVectorp]
 
-            valOH += self.lg2(np.dot(unitOHVector0, unitOHVectorp))
-            valHH += self.lg2(np.dot(unitHHVector0, unitHHVectorp))
-            valdip += self.lg2(np.dot(unitdipVector0, unitdipVectorp))
+            if self.order == 1:
+                valOH += self.lg1(np.dot(unitOHVector0, unitOHVectorp))
+                valHH += self.lg1(np.dot(unitHHVector0, unitHHVectorp))
+                valdip += self.lg1(np.dot(unitdipVector0, unitdipVectorp))
+            else:
+                valOH += self.lg2(np.dot(unitOHVector0, unitOHVectorp))
+                valHH += self.lg2(np.dot(unitHHVector0, unitHHVectorp))
+                valdip += self.lg2(np.dot(unitdipVector0, unitdipVectorp))
             n += 1
         return  (valOH/n, valHH/n, valdip/n) if n > 0 else (0, 0, 0)
 
@@ -212,6 +224,11 @@ class WaterOrientationalRelaxation(object):
                               total=universe.trajectory.n_frames):
             selection.append(universe.select_atoms(selection_str))
         return selection
+
+    @staticmethod
+    def lg1(x):
+        """First Legendre polynomial"""
+        return x
 
     @staticmethod
     def lg2(x):
