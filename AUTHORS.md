@@ -54,3 +54,4 @@ The rules for this file:
 
 **2024**
 - Fiona Naughton <@fiona-naughton>
+- Rodolphe Pollet <@rodpollet>
