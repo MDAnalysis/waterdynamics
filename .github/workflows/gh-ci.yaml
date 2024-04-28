@@ -33,8 +33,8 @@ jobs:
           python-version: ["3.10", "3.11", "3.12"]
           mdanalysis-version: ["latest", "develop"]
           exclude:
-            python-version: "3.12"
-            mdanalysis-version: "latest"
+            - python-version: "3.12"
+              mdanalysis-version: "latest"
 
     steps:
     - uses: actions/checkout@v4
