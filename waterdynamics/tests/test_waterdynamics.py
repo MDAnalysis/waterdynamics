@@ -55,7 +55,7 @@ def test_WaterOrientationalRelaxation_zeroMolecules(universe):
     wor_zero.run()
     assert_almost_equal(wor_zero.timeseries[1], (0.0, 0.0, 0.0))
 
-def test_WaterOrientationalRelaxation(universe):
+def test_WaterOrientationalRelaxation_order_1(universe):
     wor = waterdynamics.WaterOrientationalRelaxation(
         universe, SELECTION1, 0, 5, 2, order=1)
     wor.run()
