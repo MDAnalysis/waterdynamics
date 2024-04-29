@@ -63,7 +63,7 @@ def test_WaterOrientationalRelaxation_order_1(universe):
                         decimal=5)
 
 
-def test_WaterOrientationalRelaxation_zeroMolecules(universe):
+def test_WaterOrientationalRelaxation_order_1_zeroMolecules(universe):
     wor_zero = waterdynamics.WaterOrientationalRelaxation(
         universe, SELECTION2, 0, 5, 2, order=1)
     wor_zero.run()
