@@ -21,8 +21,10 @@ The rules for this file:
 ### Authors
 - fiona-naughton
 - IAlibay
+- rodpollet
 
 ### Added
+- first-order Legendre polynomial for water orientation relaxation analysis
 
 ### Fixed
 
