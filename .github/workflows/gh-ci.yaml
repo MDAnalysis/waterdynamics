@@ -35,7 +35,7 @@ jobs:
           # Manually exclude any combinations of the test matrix that can't be run 
           exclude:
             # The latest release of MDAnalysis only supports up to Python 3.11
-            # so we exclude 3.12 from the test matrix (issue
+            # so we exclude 3.12 from the test matrix (issue #37)
             - python-version: "3.12"
               mdanalysis-version: "latest"
 
