@@ -90,6 +90,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#waterdynamics.WaterOrientationalRelaxation"><code class="docutils literal notranslate"><span class="pre">WaterOrientationalRelaxation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#waterdynamics.WaterOrientationalRelaxation.lg1"><code class="docutils literal notranslate"><span class="pre">WaterOrientationalRelaxation.lg1()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#waterdynamics.WaterOrientationalRelaxation.lg2"><code class="docutils literal notranslate"><span class="pre">WaterOrientationalRelaxation.lg2()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#waterdynamics.WaterOrientationalRelaxation.run"><code class="docutils literal notranslate"><span class="pre">WaterOrientationalRelaxation.run()</span></code></a></li>
 </ul>
@@ -166,7 +167,7 @@ cosine theta [‘z’].</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="waterdynamics.WaterOrientationalRelaxation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">waterdynamics.</span></span><span class="sig-name descname"><span class="pre">WaterOrientationalRelaxation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">universe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nproc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#WaterOrientationalRelaxation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.WaterOrientationalRelaxation" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">waterdynamics.</span></span><span class="sig-name descname"><span class="pre">WaterOrientationalRelaxation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">universe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nproc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#WaterOrientationalRelaxation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.WaterOrientationalRelaxation" title="Link to this definition"></a></dt>
 <dd><p>Water orientation relaxation analysis</p>
 <p>Function to evaluate the Water Orientational Relaxation proposed by Yu-ling
 Yeh and Chung-Yuan Mou <a class="footnote-reference brackets" href="#footcite-yeh1999" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. WaterOrientationalRelaxation
@@ -175,7 +176,8 @@ This is a time correlation function given by:</p>
 <div class="math notranslate nohighlight">
 \[C_{\hat u}(\tau)=\langle \mathit{P}_2[\mathbf{\hat{u}}(t_0)\cdot\mathbf{\hat{u}}(t_0+\tau)]\rangle\]</div>
 <p>where <span class="math notranslate nohighlight">\(P_2=(3x^2-1)/2\)</span> is the second-order Legendre polynomial and <span class="math notranslate nohighlight">\(\hat{u}\)</span> is
-a unit vector along HH, OH or dipole vector.</p>
+a unit vector along HH, OH or dipole vector. Another option is to select the first-order Legendre
+polynomial, <span class="math notranslate nohighlight">\(P_1=x\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -184,9 +186,16 @@ a unit vector along HH, OH or dipole vector.</p>
 <li><p><strong>t0</strong> (<em>int</em>) – frame  where analysis begins</p></li>
 <li><p><strong>tf</strong> (<em>int</em>) – frame where analysis ends</p></li>
 <li><p><strong>dtmax</strong> (<em>int</em>) – Maximum dt size, <cite>dtmax</cite> &lt; <cite>tf</cite> or it will crash.</p></li>
+<li><p><strong>order</strong> (<em>1 or 2 (default)</em>) – first- or second-order Legendre polynomial</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="waterdynamics.WaterOrientationalRelaxation.lg1">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lg1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#WaterOrientationalRelaxation.lg1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.WaterOrientationalRelaxation.lg1" title="Link to this definition"></a></dt>
+<dd><p>First Legendre polynomial</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="waterdynamics.WaterOrientationalRelaxation.lg2">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lg2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/waterdynamics/waterdynamics.html#WaterOrientationalRelaxation.lg2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waterdynamics.WaterOrientationalRelaxation.lg2" title="Link to this definition"></a></dt>

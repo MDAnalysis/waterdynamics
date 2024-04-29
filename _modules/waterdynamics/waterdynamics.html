@@ -176,7 +176,8 @@
 <span class="sd">        C_{\hat u}(\tau)=\langle \mathit{P}_2[\mathbf{\hat{u}}(t_0)\cdot\mathbf{\hat{u}}(t_0+\tau)]\rangle</span>
 
 <span class="sd">    where :math:`P_2=(3x^2-1)/2` is the second-order Legendre polynomial and :math:`\hat{u}` is</span>
-<span class="sd">    a unit vector along HH, OH or dipole vector.</span>
+<span class="sd">    a unit vector along HH, OH or dipole vector. Another option is to select the first-order Legendre</span>
+<span class="sd">    polynomial, :math:`P_1=x`.</span>
 
 
 <span class="sd">    Parameters</span>
@@ -191,15 +192,21 @@
 <span class="sd">      frame where analysis ends</span>
 <span class="sd">    dtmax : int</span>
 <span class="sd">      Maximum dt size, `dtmax` &lt; `tf` or it will crash.</span>
+<span class="sd">    order : 1 or 2 (default)</span>
+<span class="sd">      first- or second-order Legendre polynomial</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dtmax</span><span class="p">,</span> <span class="n">nproc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">select</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tf</span> <span class="o">=</span> <span class="n">tf</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dtmax</span> <span class="o">=</span> <span class="n">dtmax</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nproc</span> <span class="o">=</span> <span class="n">nproc</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">order</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;order = </span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2"> but only first- or second-order Legendre polynomial is allowed.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">_repeatedIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">totalFrames</span><span class="p">):</span>
@@ -275,9 +282,14 @@
                               <span class="n">dipVectorp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">normdipVectorp</span><span class="p">,</span>
                               <span class="n">dipVectorp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">normdipVectorp</span><span class="p">]</span>
 
-            <span class="n">valOH</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitOHVector0</span><span class="p">,</span> <span class="n">unitOHVectorp</span><span class="p">))</span>
-            <span class="n">valHH</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitHHVector0</span><span class="p">,</span> <span class="n">unitHHVectorp</span><span class="p">))</span>
-            <span class="n">valdip</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitdipVector0</span><span class="p">,</span> <span class="n">unitdipVectorp</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">valOH</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg1</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitOHVector0</span><span class="p">,</span> <span class="n">unitOHVectorp</span><span class="p">))</span>
+                <span class="n">valHH</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg1</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitHHVector0</span><span class="p">,</span> <span class="n">unitHHVectorp</span><span class="p">))</span>
+                <span class="n">valdip</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg1</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitdipVector0</span><span class="p">,</span> <span class="n">unitdipVectorp</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">valOH</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitOHVector0</span><span class="p">,</span> <span class="n">unitOHVectorp</span><span class="p">))</span>
+                <span class="n">valHH</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitHHVector0</span><span class="p">,</span> <span class="n">unitHHVectorp</span><span class="p">))</span>
+                <span class="n">valdip</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lg2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">unitdipVector0</span><span class="p">,</span> <span class="n">unitdipVectorp</span><span class="p">))</span>
             <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span>  <span class="p">(</span><span class="n">valOH</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">valHH</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">valdip</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
@@ -326,6 +338,14 @@
                               <span class="n">total</span><span class="o">=</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">):</span>
             <span class="n">selection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection_str</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">selection</span>
+
+<div class="viewcode-block" id="WaterOrientationalRelaxation.lg1">
+<a class="viewcode-back" href="../../api.html#waterdynamics.WaterOrientationalRelaxation.lg1">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">lg1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;First Legendre polynomial&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+
 
 <div class="viewcode-block" id="WaterOrientationalRelaxation.lg2">
 <a class="viewcode-back" href="../../api.html#waterdynamics.WaterOrientationalRelaxation.lg2">[docs]</a>
