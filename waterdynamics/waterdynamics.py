@@ -39,6 +39,7 @@ For more information about this type of analysis please refer to
 
 .. footbibliography::
 """
+from MDAnalysis.lib.log import ProgressBar
 from MDAnalysis.lib.correlations import autocorrelation, correct_intermittency
 from MDAnalysis.lib.distances import minimize_vectors
 from MDAnalysis.analysis.base import AnalysisBase
@@ -49,8 +50,6 @@ import numpy as np
 
 
 logger = logging.getLogger('waterdynamics')
-from MDAnalysis.lib.log import ProgressBar
-
 
 
 class WaterOrientationalRelaxation(AnalysisBase):
@@ -89,19 +88,20 @@ class WaterOrientationalRelaxation(AnalysisBase):
     order : 1 or 2 (default)
       first- or second-order Legendre polynomial
     """
+
     def __init__(self, atomgroup, selection, lag_max, OH_cutoff, nproc=1, order=2, update_selections=False, **kwargs):
         super(WaterOrientationalRelaxation, self).__init__(atomgroup.universe.trajectory,
-                                          **kwargs)
+                                                           **kwargs)
         # selection is a list of two strings, one for all O, and for subsect, one for H
 
         self._ag = atomgroup
         # selection of all relevant oxygen atoms that are possible to be the atoms of interest
-        self.selection_oxygen = selection[0] 
-        # selection of the oxygen atoms of interest, for example, atoms in a region. 
+        self.selection_oxygen = selection[0]
+        # selection of the oxygen atoms of interest, for example, atoms in a region.
         # The oxygen atoms can flow in and out of this region.
-        self.selection_oxygen_subset = selection[1] 
+        self.selection_oxygen_subset = selection[1]
         # selection of the hydrogen atoms that are possible to attach to the oxygen atoms of interest
-        self.selection_hydrogen = selection[2] 
+        self.selection_hydrogen = selection[2]
         self.update_selections = update_selections
 
         self.OH_cutoff = OH_cutoff
@@ -111,10 +111,10 @@ class WaterOrientationalRelaxation(AnalysisBase):
         self.nproc = nproc
 
         if order != 1 and order != 2:
-            raise ValueError(f"order = {order} but only first- or second-order Legendre polynomial is allowed.")
+            raise ValueError(
+                f"order = {order} but only first- or second-order Legendre polynomial is allowed.")
         else:
             self.order = order
-
 
     def _prepare(self):
         # Called before iteration on the trajectory has begun.
@@ -124,14 +124,15 @@ class WaterOrientationalRelaxation(AnalysisBase):
         self.cellpar = self._ag.dimensions
 
         self._ag_oxygen = self._ag.select_atoms(self.selection_oxygen)
-        self._ag_oxygen_subset = self._ag.select_atoms(self.selection_oxygen_subset)
+        self._ag_oxygen_subset = self._ag.select_atoms(
+            self.selection_oxygen_subset)
         self.n_oxygen = len(self._ag_oxygen)
-    
+
         self.get_water_list()
         # matrix to store the dipole vectors, n_frames x n_oxygen x 3
         self.dipole_matrix = np.empty((self.n_frames, self.n_oxygen, 3))
-        self.dipole_matrix.fill(np.nan) # np.nan is a placeholder for missing data
-
+        # np.nan is a placeholder for missing data
+        self.dipole_matrix.fill(np.nan)
 
     def _single_frame(self):
         # loop over frames
@@ -149,7 +150,8 @@ class WaterOrientationalRelaxation(AnalysisBase):
             OHVector1 = pos_H1 - pos_O
             OHVector2 = pos_H2 - pos_O
             # consider the periodic boundary conditions
-            vectors = minimize_vectors(np.array([OHVector1, OHVector2]), box=self.cellpar)
+            vectors = minimize_vectors(
+                np.array([OHVector1, OHVector2]), box=self.cellpar)
             dipVector = np.mean(vectors, axis=0)
 
             # normalize the dipole vector
@@ -158,24 +160,24 @@ class WaterOrientationalRelaxation(AnalysisBase):
 
             self.dipole_matrix[self._frame_index, count] = unitdipVector
 
-
     def _conclude(self):
 
         # lagseries stores the correlation (lag) time
         # correlation stores the corresponding correlation value
         self.results["lagseries"] = np.zeros((self.lag_max+1))
-        self.results["lagseries"][0] = 0 # first lag time is zero.
+        self.results["lagseries"][0] = 0  # first lag time is zero.
         self.results["correlation"] = np.zeros((self.lag_max+1))
-        self.results["correlation"][0] = 1.0 # first correlation must be 1.0
+        self.results["correlation"][0] = 1.0  # first correlation must be 1.0
 
         # compute the correlation
         # diole matrix has the shape of (n_frames, n_oxygen, 3)
-        #print(self.dipole_matrix)
+        # print(self.dipole_matrix)
         for lag in range(1, self.lag_max+1):
             # first we slice the dipole matrix according to the lag time
             reduced_dipole_matrix = self.dipole_matrix[::lag]
             # then we compute the correlation by shifting one frame
-            correlation = np.sum(reduced_dipole_matrix[1:]*reduced_dipole_matrix[:-1], axis=2)
+            correlation = np.sum(
+                reduced_dipole_matrix[1:]*reduced_dipole_matrix[:-1], axis=2)
             if self.order == 1:
                 correlation = self.lg1(correlation)
             elif self.order == 2:
@@ -183,34 +185,31 @@ class WaterOrientationalRelaxation(AnalysisBase):
             # nan left in the array, use nan mean to exclude them.
             correlation = np.nanmean(correlation)
 
-
             self.results["lagseries"][lag] = lag
             self.results["correlation"][lag] = correlation
 
-
     def get_water_list(self):
         self.idxs_water_list = []
-        #print("List of found water molecules")
-        #print("Oxygen atom, Hydrogen atom 1, Hydrogen atom 2")
+        # print("List of found water molecules")
+        # print("Oxygen atom, Hydrogen atom 1, Hydrogen atom 2")
         for i in range(self.n_oxygen):
             if self._ag_oxygen[i].id in self._ag_oxygen_subset.ids:
-                self._tmp_ag_H = self._ag.select_atoms(f" ({self.selection_hydrogen}) and around {self.OH_cutoff} id {self._ag_oxygen[i].id}")
+                self._tmp_ag_H = self._ag.select_atoms(
+                    f" ({self.selection_hydrogen}) and around {self.OH_cutoff} id {self._ag_oxygen[i].id}")
                 # if not a water molecule, append place holder [] and skip
                 if len(self._tmp_ag_H) != 2:
                     self.idxs_water_list.append([])
                     continue
-                idxs_water = [ idx for idx in self._tmp_ag_H.ids]
+                idxs_water = [idx for idx in self._tmp_ag_H.ids]
                 idxs_water.insert(0, self._ag_oxygen[i].id)
                 self.idxs_water_list.append(idxs_water)
             else:
                 self.idxs_water_list.append([])
 
-
     @staticmethod
     def lg1(x):
         """First Legendre polynomial"""
         return x
-
 
     @staticmethod
     def lg2(x):
@@ -258,7 +257,8 @@ class WaterOrientationalRelaxationDeprecated(object):
         self.dtmax = dtmax
         self.nproc = nproc
         if order != 1 and order != 2:
-            raise ValueError(f"order = {order} but only first- or second-order Legendre polynomial is allowed.")
+            raise ValueError(
+                f"order = {order} but only first- or second-order Legendre polynomial is allowed.")
         else:
             self.order = order
         self.timeseries = None
@@ -345,8 +345,7 @@ class WaterOrientationalRelaxationDeprecated(object):
                 valHH += self.lg2(np.dot(unitHHVector0, unitHHVectorp))
                 valdip += self.lg2(np.dot(unitdipVector0, unitdipVectorp))
             n += 1
-        return  (valOH/n, valHH/n, valdip/n) if n > 0 else (0, 0, 0)
-
+        return (valOH/n, valHH/n, valdip/n) if n > 0 else (0, 0, 0)
 
     def _getMeanOnePoint(self, universe, selection1, selection_str, dt,
                          totalFrames):
@@ -866,13 +865,15 @@ class SurvivalProbability(object):
         # and for extra frames that were loaded (intermittency)
         window_jump = step - num_frames_to_skip
 
-        self._intermittent_selected_ids = correct_intermittency(self._selected_ids, intermittency=intermittency)
+        self._intermittent_selected_ids = correct_intermittency(
+            self._selected_ids, intermittency=intermittency)
         tau_timeseries, sp_timeseries, sp_timeseries_data = autocorrelation(self._intermittent_selected_ids,
                                                                             tau_max, window_jump)
 
         # warn the user if the NaN are found
         if all(np.isnan(sp_timeseries[1:])):
-            logger.warning('NaN Error: Most likely data was not found. Check your atom selections. ')
+            logger.warning(
+                'NaN Error: Most likely data was not found. Check your atom selections. ')
 
         # user can investigate the distribution and sample size
         self.sp_timeseries_data = sp_timeseries_data
