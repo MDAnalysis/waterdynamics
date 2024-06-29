@@ -75,7 +75,7 @@ class WaterOrientationalRelaxation(AnalysisBase):
     selection : str
       Selection is a list of three strings,
       The first one is the selection of all relevant oxygen atoms that are possible to be the atoms of interest
-      The second one is the selection of the oxygen atoms of interest, for example, atoms in a region. 
+      The second one is the selection of the oxygen atoms of interest, for example, atoms in a region.
       The third one is the selection of the hydrogen atoms that are possible to attach to the oxygen atoms of interest.
       Example: ["name OH2", "name OH2 and prop z <5 " ,"name H1 or name H2"]
     lag_max : int
@@ -83,24 +83,28 @@ class WaterOrientationalRelaxation(AnalysisBase):
     OH_cutoff : float
         Cutoff distance for the hydrogen atoms to be considered as attached to the oxygen atoms of interest.
     update_selections: bool
-      If True, the selection of the oxygen atoms of interest and 
+      If True, the selection of the oxygen atoms of interest and
       the hydrogen atoms that are possible to attach to the oxygen atoms of interest will be updated at each frame.
     order : 1 or 2 (default)
       first- or second-order Legendre polynomial
     """
 
-    def __init__(self, atomgroup, selection, lag_max, OH_cutoff, nproc=1, order=2, update_selections=False, **kwargs):
+    def __init__(self, atomgroup, selection, lag_max, OH_cutoff,
+                 nproc=1, order=2, update_selections=False, **kwargs):
         super(WaterOrientationalRelaxation, self).__init__(atomgroup.universe.trajectory,
                                                            **kwargs)
-        # selection is a list of two strings, one for all O, and for subsect, one for H
+        # selection is a list of two strings, one for all O, and for subsect,
+        # one for H
 
         self._ag = atomgroup
-        # selection of all relevant oxygen atoms that are possible to be the atoms of interest
+        # selection of all relevant oxygen atoms that are possible to be the
+        # atoms of interest
         self.selection_oxygen = selection[0]
         # selection of the oxygen atoms of interest, for example, atoms in a region.
         # The oxygen atoms can flow in and out of this region.
         self.selection_oxygen_subset = selection[1]
-        # selection of the hydrogen atoms that are possible to attach to the oxygen atoms of interest
+        # selection of the hydrogen atoms that are possible to attach to the
+        # oxygen atoms of interest
         self.selection_hydrogen = selection[2]
         self.update_selections = update_selections
 
@@ -119,7 +123,8 @@ class WaterOrientationalRelaxation(AnalysisBase):
     def _prepare(self):
         # Called before iteration on the trajectory has begun.
         # TODO: parallel computation.
-        # use lagseries instead of timeseries to avoid confusion with the quantity over timestep.
+        # use lagseries instead of timeseries to avoid confusion with the
+        # quantity over timestep.
         self.results = {}
         self.cellpar = self._ag.dimensions
 
@@ -164,20 +169,20 @@ class WaterOrientationalRelaxation(AnalysisBase):
 
         # lagseries stores the correlation (lag) time
         # correlation stores the corresponding correlation value
-        self.results["lagseries"] = np.zeros((self.lag_max+1))
+        self.results["lagseries"] = np.zeros((self.lag_max + 1))
         self.results["lagseries"][0] = 0  # first lag time is zero.
-        self.results["correlation"] = np.zeros((self.lag_max+1))
+        self.results["correlation"] = np.zeros((self.lag_max + 1))
         self.results["correlation"][0] = 1.0  # first correlation must be 1.0
 
         # compute the correlation
         # diole matrix has the shape of (n_frames, n_oxygen, 3)
         # print(self.dipole_matrix)
-        for lag in range(1, self.lag_max+1):
+        for lag in range(1, self.lag_max + 1):
             # first we slice the dipole matrix according to the lag time
             reduced_dipole_matrix = self.dipole_matrix[::lag]
             # then we compute the correlation by shifting one frame
             correlation = np.sum(
-                reduced_dipole_matrix[1:]*reduced_dipole_matrix[:-1], axis=2)
+                reduced_dipole_matrix[1:] * reduced_dipole_matrix[:-1], axis=2)
             if self.order == 1:
                 correlation = self.lg1(correlation)
             elif self.order == 2:
@@ -214,7 +219,7 @@ class WaterOrientationalRelaxation(AnalysisBase):
     @staticmethod
     def lg2(x):
         """Second Legendre polynomial"""
-        return (3*x*x - 1)/2
+        return (3 * x * x - 1) / 2
 
 
 class WaterOrientationalRelaxationDeprecated(object):
@@ -345,7 +350,7 @@ class WaterOrientationalRelaxationDeprecated(object):
                 valHH += self.lg2(np.dot(unitHHVector0, unitHHVectorp))
                 valdip += self.lg2(np.dot(unitdipVector0, unitdipVectorp))
             n += 1
-        return (valOH/n, valHH/n, valdip/n) if n > 0 else (0, 0, 0)
+        return (valOH / n, valHH / n, valdip / n) if n > 0 else (0, 0, 0)
 
     def _getMeanOnePoint(self, universe, selection1, selection_str, dt,
                          totalFrames):
@@ -370,7 +375,8 @@ class WaterOrientationalRelaxationDeprecated(object):
 
         # if no water molecules remain in selection, there is nothing to get
         # the mean, so n = 0.
-        return (sumDeltaOH / n, sumDeltaHH / n, sumDeltadip / n) if n > 0 else (0, 0, 0)
+        return (sumDeltaOH / n, sumDeltaHH / n,
+                sumDeltadip / n) if n > 0 else (0, 0, 0)
 
     def _sameMolecTandDT(self, selection, t0d, tf):
         """
@@ -400,7 +406,7 @@ class WaterOrientationalRelaxationDeprecated(object):
     @staticmethod
     def lg2(x):
         """Second Legendre polynomial"""
-        return (3*x*x - 1)/2
+        return (3 * x * x - 1) / 2
 
     def run(self, **kwargs):
         """Analyze trajectory and produce timeseries"""
@@ -653,7 +659,7 @@ class MeanSquareDisplacement(object):
 
         # if no water molecules remain in selection, there is nothing to get
         # the mean, so n = 0.
-        return valO/n if n > 0 else 0
+        return valO / n if n > 0 else 0
 
     def _getMeanOnePoint(self, universe, selection1, selection_str, dt,
                          totalFrames):
@@ -676,7 +682,7 @@ class MeanSquareDisplacement(object):
 
         # if no water molecules remain in selection, there is nothing to get
         # the mean, so n = 0.
-        return sumDeltaO/n if n > 0 else 0
+        return sumDeltaO / n if n > 0 else 0
 
     def _sameMolecTandDT(self, selection, t0d, tf):
         """
@@ -725,9 +731,9 @@ class SurvivalProbability(object):
     .. math::
         P(\tau) = \langle \frac{ N(t, t + \tau )} { N(t) }\rangle
 
-    where :math:`\tau` is the timestep, :math:`N(t)` the number of particles at time 
-    :math:`t`, and :math:`N(t, t+\tau)` is the number of particles at every frame from 
-    :math:`t` to :math:`t + \tau`. The angular brackets represent an average over all time 
+    where :math:`\tau` is the timestep, :math:`N(t)` the number of particles at time
+    :math:`t`, and :math:`N(t, t+\tau)` is the number of particles at every frame from
+    :math:`t` to :math:`t + \tau`. The angular brackets represent an average over all time
     origins, :math:`t`. See :func:`MDAnalysis.lib.correlations.autocorrelation` for
     technical details.
 
@@ -738,7 +744,7 @@ class SurvivalProbability(object):
       Universe object
     select : str
       Selection string; any selection is allowed. With this selection you
-      define the region/zone where to analyze, e.g.: "resname SOL and around 5 
+      define the region/zone where to analyze, e.g.: "resname SOL and around 5
       (resid 10)".
     verbose : Boolean, optional
       When True, prints progress and comments to the console.
