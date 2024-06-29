@@ -43,31 +43,48 @@ def universe():
 
 def test_WaterOrientationalRelaxation(universe):
     wor = waterdynamics.WaterOrientationalRelaxation(
-        universe, SELECTION1, 0, 5, 2, order=2)
-    wor.run()
-    assert_almost_equal(wor.timeseries[1][2], 0.35887,
+        universe.atoms, ["name OH2", "name OH2 " ,"name H1 or name H2"], 2, 1.2, update_selections=False, order=1)
+    wor.run(start=0, stop=4)
+    assert_almost_equal(wor.results["correlation"][2],  0.7148607552,
                         decimal=5)
 
 
-def test_WaterOrientationalRelaxation_zeroMolecules(universe):
-    wor_zero = waterdynamics.WaterOrientationalRelaxation(
-        universe, SELECTION2, 0, 5, 2, order=2)
-    wor_zero.run()
-    assert_almost_equal(wor_zero.timeseries[1], (0.0, 0.0, 0.0))
-
-def test_WaterOrientationalRelaxation_order_1(universe):
+def test_WaterOrientationalRelaxationRegion(universe):
     wor = waterdynamics.WaterOrientationalRelaxation(
-        universe, SELECTION1, 0, 5, 2, order=1)
-    wor.run()
-    assert_almost_equal(wor.timeseries[1][2], 0.71486,
+        universe.atoms, ["name OH2", "name OH2 and prop z <5 " ,"name H1 or name H2"], 2, 1.2, order=1)
+    wor.run(start=0, stop=4)
+    assert_almost_equal(wor.results["correlation"][2],  0.810989,
                         decimal=5)
 
 
-def test_WaterOrientationalRelaxation_order_1_zeroMolecules(universe):
-    wor_zero = waterdynamics.WaterOrientationalRelaxation(
-        universe, SELECTION2, 0, 5, 2, order=1)
-    wor_zero.run()
-    assert_almost_equal(wor_zero.timeseries[1], (0.0, 0.0, 0.0))
+# def test_WaterOrientationalRelaxationDeprecated(universe):
+#     wor = waterdynamics.WaterOrientationalRelaxation(
+#         universe, SELECTION1, 0, 5, 2, order=2)
+#     wor.run()
+#     assert_almost_equal(wor.timeseries[1][2], 0.35887,
+#                         decimal=5)
+
+
+# def test_WaterOrientationalRelaxation_zeroMoleculesDeprecated(universe):
+#     wor_zero = waterdynamics.WaterOrientationalRelaxation(
+#         universe, SELECTION2, 0, 5, 2, order=2)
+#     wor_zero.run()
+#     assert_almost_equal(wor_zero.timeseries[1], (0.0, 0.0, 0.0))
+
+# def test_WaterOrientationalRelaxation_order_1Deprecated(universe):
+#     wor = waterdynamics.WaterOrientationalRelaxation(
+#         universe, SELECTION1, 0, 5, 2, order=1)
+#     wor.run()
+#     print(wor.timeseries)
+#     assert_almost_equal(wor.timeseries[1][2], 0.71486,
+#                         decimal=5)
+
+
+# def test_WaterOrientationalRelaxation_order_1_zeroMoleculesDeprecated(universe):
+#     wor_zero = waterdynamics.WaterOrientationalRelaxation(
+#         universe, SELECTION2, 0, 5, 2, order=1)
+#     wor_zero.run()
+#     assert_almost_equal(wor_zero.timeseries[1], (0.0, 0.0, 0.0))
 
 
 def test_AngularDistribution(universe):
