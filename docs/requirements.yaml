@@ -10,5 +10,7 @@ dependencies:
 
   - mdanalysis-sphinx-theme >=1.0.1
   - sphinxcontrib-bibtex
+  # Temporary pin whilst we don't support numpy 2.0 upstream
+  - numpy <2.0
     # Pip-only installs
   #- pip:
