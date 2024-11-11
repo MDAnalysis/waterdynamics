@@ -57,7 +57,7 @@ jobs:
         environment-file: devtools/conda-envs/test_env.yaml
         add-pip-as-python-dependency: true
 
-        miniforge-variant: Mambaforge
+        miniforge-version: "latest"
         use-mamba: true
         channels: conda-forge, defaults
 
