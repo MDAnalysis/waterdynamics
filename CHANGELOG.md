@@ -16,7 +16,7 @@ The rules for this file:
   * accompany each entry with github issue/PR number (Issue #xyz)
 -->
 
-## [Unreleased]
+## [1.2.0] - 2024-11-22
 
 ### Authors
 - fiona-naughton
@@ -32,6 +32,7 @@ The rules for this file:
  - update changelog (PR #32)
  - In line with SPEC0, the minimum supported Python version is now 3.10
  - Minimum support MDAnalysis version has been raised to 2.1.0
+ - License changed to LGPLv2.1+
 
 ## [1.1.0] - 2024-01-11
 

@@ -5,7 +5,7 @@ waterdynamics
 | **Latest release** | [![Last release tag][badge_release]][url_latest_release] ![GitHub commits since latest release (by date) for a branch][badge_commits_since]  |
 | :----------------- | :------- |
 | **Status**         | [![GH Actions Status][badge_actions]][url_actions] [![codecov][badge_codecov]][url_codecov] [![Docs][badge_docs]][docs_workflow] |
-| **Community**      | [![License: GPL v2][badge_license]][url_license]  [![Powered by MDAnalysis][badge_mda]][url_mda]|
+| **Community**      | [![Powered by MDAnalysis][badge_mda]][url_mda]|
 
 [badge_actions]: https://github.com/MDAnalysis/waterdynamics/actions/workflows/gh-ci.yaml/badge.svg
 [badge_codecov]: https://codecov.io/gh/MDAnalysis/waterdynamics/branch/main/graph/badge.svg
