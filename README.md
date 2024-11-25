@@ -5,7 +5,7 @@ waterdynamics
 | **Latest release** | [![Last release tag][badge_release]][url_latest_release] ![GitHub commits since latest release (by date) for a branch][badge_commits_since]  |
 | :----------------- | :------- |
 | **Status**         | [![GH Actions Status][badge_actions]][url_actions] [![codecov][badge_codecov]][url_codecov] [![Docs][badge_docs]][docs_workflow] |
-| **Community**      | [![License: GPL v2][badge_license]][url_license]  [![Powered by MDAnalysis][badge_mda]][url_mda]|
+| **Community**      | [![Powered by MDAnalysis][badge_mda]][url_mda]|
 
 [badge_actions]: https://github.com/MDAnalysis/waterdynamics/actions/workflows/gh-ci.yaml/badge.svg
 [badge_codecov]: https://codecov.io/gh/MDAnalysis/waterdynamics/branch/main/graph/badge.svg
@@ -19,7 +19,6 @@ waterdynamics
 [url_codecov]: https://codecov.io/gh/MDAnalysis/waterdynamics/branch/main
 [url_docs]: https://waterdynamics.readthedocs.io/en/latest/?badge=latest
 [url_latest_release]: https://github.com/MDAnalysis/waterdynamics/releases
-[url_license]: https://www.gnu.org/licenses/gpl-2.0
 [url_mda]: https://www.mdanalysis.org
 
 Analysis of water dynamics in molecular dynamics trajectories and water interactions with other molecules.
@@ -100,7 +99,7 @@ pip install ".[test,doc]"
 ### Copyright
 
 The waterdynamics source code is hosted at https://github.com/MDAnalysis/waterdynamics
-and is available under the GNU General Public License, version 2 (see the file [LICENSE](https://github.com/MDAnalysis/waterdynamics/blob/main/LICENSE)).
+and is available under the Lesser GNU General Public License, version 2.1 or later (see the file [LICENSE](https://github.com/MDAnalysis/waterdynamics/blob/main/LICENSE)).
 
 Copyright (c) 2023, MDAnalysis
 
